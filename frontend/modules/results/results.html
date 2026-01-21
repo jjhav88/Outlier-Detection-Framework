@@ -1,0 +1,688 @@
+<!-- Dashboard Dinámico estilo Power BI -->
+<div class="dashboard-workspace">
+    <!-- Panel de Herramientas (Toolbox) -->
+    <div class="toolbox-panel">
+        <div class="toolbox-header">
+            <h5><i class="fas fa-chart-line"></i> Dashboard de Outliers</h5>
+        </div>
+        
+        <!-- Sección OUTLIERS -->
+        <div class="toolbox-section">
+            <h6>OUTLIERS</h6>
+            <div class="tool-item" draggable="true" data-widget-type="card" data-metric="total-records">
+                <i class="fas fa-database"></i>
+                <span>Total de Registros</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="card" data-metric="outliers-detected">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>Outliers Identificados</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="card" data-metric="normal-data">
+                <i class="fas fa-check-circle"></i>
+                <span>Datos Normales</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="card" data-metric="outlier-percentage">
+                <i class="fas fa-percentage"></i>
+                <span>Porcentaje de Outliers</span>
+            </div>
+        </div>
+        
+        <!-- Sección DESCRIPTIVA -->
+        <div class="toolbox-section">
+            <h6>DESCRIPTIVA</h6>
+            <div class="tool-item" draggable="true" data-widget-type="histogram">
+                <i class="fas fa-chart-bar"></i>
+                <span>Histograma</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="density">
+                <i class="fas fa-chart-area"></i>
+                <span>Densidad</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="boxplot">
+                <i class="fas fa-chart-box"></i>
+                <span>Boxplot</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="violin">
+                <i class="fas fa-music"></i>
+                <span>Violín</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="pie">
+                <i class="fas fa-chart-pie"></i>
+                <span>Pastel</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="scatter">
+                <i class="fas fa-chart-scatter"></i>
+                <span>Dispersión</span>
+            </div>
+            <div class="tool-item" draggable="true" data-widget-type="descriptive-table">
+                <i class="fas fa-table"></i>
+                <span>Tabla Descriptiva</span>
+            </div>
+        </div>
+        
+        <!-- Sección ANÁLISIS DE OUTLIERS -->
+        <div class="toolbox-section">
+            <h6>ANÁLISIS DE OUTLIERS</h6>
+            
+            <!-- PCA -->
+            <div class="toolbox-subsection">
+                <h6 class="subsection-title">PCA</h6>
+                <div class="tool-item" draggable="true" data-widget-type="pca-elbow">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Gráfico del Codo</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="pca-viz">
+                    <i class="fas fa-chart-scatter"></i>
+                    <span>Visualización PCA</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="pca-biplot">
+                    <i class="fas fa-chart-network"></i>
+                    <span>Biplot PCA</span>
+                </div>
+            </div>
+            
+            <!-- Regresión Logística -->
+            <div class="toolbox-subsection">
+                <h6 class="subsection-title">Regresión Logística</h6>
+                <div class="tool-item" draggable="true" data-widget-type="logistic-metrics">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Métricas</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="confusion-matrix">
+                    <i class="fas fa-table"></i>
+                    <span>Matriz de Confusión</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="coefficients">
+                    <i class="fas fa-list-ol"></i>
+                    <span>Coeficientes</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="roc-curve">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Curva ROC</span>
+                </div>
+            </div>
+            
+            <!-- Análisis de Clustering -->
+            <div class="toolbox-subsection">
+                <h6 class="subsection-title">Clustering</h6>
+                <div class="tool-item" draggable="true" data-widget-type="clustering-elbow">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Método del Codo</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="silhouette-plot">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Coeficiente de Silueta</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="calinski-harabasz">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Calinski-Harabasz</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="davies-bouldin">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Davies-Bouldin</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="clustering-metrics">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Métricas de Clustering</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="kmeans-visualization">
+                    <i class="fas fa-chart-scatter"></i>
+                    <span>K-means PCA</span>
+                </div>
+            </div>
+            
+            <!-- Clustering Jerárquico -->
+            <div class="toolbox-subsection">
+                <h6 class="subsection-title">Clustering Jerárquico</h6>
+                <div class="tool-item" draggable="true" data-widget-type="hierarchical-visualization">
+                    <i class="fas fa-chart-scatter"></i>
+                    <span>Visualización PCA</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="dendrogram-tree">
+                    <i class="fas fa-sitemap"></i>
+                    <span>Dendrograma Árbol</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="dendrogram-circular">
+                    <i class="fas fa-circle"></i>
+                    <span>Dendrograma Circular</span>
+                </div>
+            </div>
+            
+            <!-- Validación de Clustering -->
+            <div class="toolbox-subsection">
+                <h6 class="subsection-title">Validación</h6>
+                <div class="tool-item" draggable="true" data-widget-type="hopkins-statistic">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Hopkins Statistic</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="clustering-tendency">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tendencia de Clustering</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="sample-size">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Tamaño de Muestra</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="pca-comparison">
+                    <i class="fas fa-chart-scatter"></i>
+                    <span>Comparación PCA</span>
+                </div>
+                <div class="tool-item" draggable="true" data-widget-type="vat-matrix">
+                    <i class="fas fa-th"></i>
+                    <span>Matriz VAT</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área Principal del Dashboard -->
+    <div class="dashboard-main">
+        <!-- Barra de Herramientas Superior -->
+        <div class="dashboard-toolbar">
+            <div class="toolbar-left">
+                <h4><i class="fas fa-tachometer-alt"></i> Dashboard Dinámico</h4>
+                <div class="dashboard-selector ms-3">
+                    <select class="form-select form-select-sm" id="dashboardSelector" style="min-width: 200px;">
+                        <option value="">Seleccionar Dashboard...</option>
+                    </select>
+                    <button class="btn btn-outline-primary btn-sm ms-2" id="newDashboardBtn" title="Crear Nuevo Dashboard">
+                        <i class="fas fa-plus"></i> Nuevo
+                    </button>
+                </div>
+            </div>
+            <div class="toolbar-center">
+                <button class="btn btn-outline-primary btn-sm" id="saveLayoutBtn">
+                    <i class="fas fa-save"></i> Guardar Dashboard
+                </button>
+                <button class="btn btn-outline-secondary btn-sm" id="loadLayoutBtn">
+                    <i class="fas fa-folder-open"></i> Cargar Dashboard
+                </button>
+                <button class="btn btn-outline-warning btn-sm" id="renameDashboardBtn" title="Renombrar Dashboard Actual">
+                    <i class="fas fa-edit"></i> Renombrar
+                </button>
+                <button class="btn btn-outline-danger btn-sm" id="deleteDashboardBtn" title="Eliminar Dashboard Actual">
+                    <i class="fas fa-trash"></i> Eliminar
+                </button>
+                <button class="btn btn-outline-danger btn-sm" id="clearLayoutBtn">
+                    <i class="fas fa-broom"></i> Limpiar
+                </button>
+            </div>
+            <div class="toolbar-right">
+                <button class="btn btn-outline-info btn-sm" id="fullscreenBtn" title="Pantalla Completa">
+                    <i class="fas fa-expand"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Área de Diseño del Dashboard -->
+        <div class="dashboard-canvas" id="dashboardCanvas">
+            <div class="canvas-grid" id="canvasGrid">
+                <!-- Los widgets se agregarán dinámicamente aquí -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Panel de Propiedades -->
+    <div class="properties-panel" id="propertiesPanel">
+        <div class="properties-header">
+            <h5><i class="fas fa-cog"></i> Propiedades</h5>
+            <button class="btn-close" id="closePropertiesBtn">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="properties-content" id="propertiesContent">
+            <div class="no-selection">
+                <i class="fas fa-mouse-pointer"></i>
+                <p>Selecciona un elemento para configurar sus propiedades</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Templates para Widgets -->
+<template id="widget-template">
+    <div class="dashboard-widget" data-widget-id="">
+        <div class="widget-header">
+            <div class="widget-title"></div>
+            <div class="widget-controls">
+                <button class="btn-widget-config" title="Configurar">
+                    <i class="fas fa-cog"></i>
+                </button>
+                <button class="btn-widget-remove" title="Eliminar">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+        <div class="widget-content">
+            <!-- El contenido específico se agregará dinámicamente -->
+        </div>
+        <div class="widget-resize-handle"></div>
+    </div>
+</template>
+
+<!-- Modal para Configuración de Widgets -->
+<div class="modal fade" id="widgetConfigModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Configurar Widget</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="widgetConfigContent">
+                <!-- Contenido de configuración dinámico -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-primary" id="applyWidgetConfig">Aplicar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Plotly.js para gráficos interactivos -->
+<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<!-- Estilos CSS personalizados para widgets de métricas -->
+<style>
+    /* Estilos para el widget de métricas de regresión logística */
+    .logistic-metrics-container {
+        padding: 15px;
+    }
+    
+    /* Título completamente separado */
+    .title-section {
+        border-bottom: 2px solid #e9ecef;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+    
+    .logistic-metrics-container h5 {
+        font-weight: 600;
+        margin: 0;
+        color: #0d6efd;
+        font-size: 1.25rem;
+    }
+    
+    .logistic-metrics-container .card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+    
+    .logistic-metrics-container .card-header {
+        font-weight: 600;
+        padding: 12px 15px;
+    }
+    
+    .logistic-metrics-container .card-body {
+        padding: 20px;
+    }
+    
+    /* Estilos para los cards de métricas de rendimiento */
+    .metric-item {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px 15px;
+        margin: 0;
+        border: 1px solid #e9ecef;
+        min-height: 90px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    
+    .metric-item .metric-value {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        line-height: 1.2;
+    }
+    
+    .metric-item .metric-label {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #6c757d;
+        text-align: center;
+        line-height: 1.2;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: clip;
+        max-width: none;
+        width: 100%;
+    }
+    
+    /* Asegurar que las columnas tengan el ancho adecuado */
+    .logistic-metrics-container .col-4 {
+        min-width: 140px;
+        padding: 0 5px;
+    }
+    
+    /* Estilos para la información del modelo */
+    .logistic-metrics-container .row .col-6 {
+        margin-bottom: 10px;
+    }
+    
+    .logistic-metrics-container strong {
+        color: #495057;
+        font-weight: 600;
+    }
+    
+    /* Mejorar espaciado entre elementos */
+    .logistic-metrics-container .row.g-3 > [class*="col-"] {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        .logistic-metrics-container .col-4 {
+            min-width: 120px;
+        }
+        
+        .metric-item .metric-value {
+            font-size: 1.2rem;
+        }
+        
+        .metric-item .metric-label {
+            font-size: 0.75rem;
+        }
+    }
+    
+    /* ===== ESTILOS PARA WIDGET DE MATRIZ DE CONFUSIÓN ===== */
+    
+    .confusion-matrix-container {
+        padding: 15px;
+    }
+    
+    .confusion-matrix-container h6 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #0d6efd;
+        font-size: 1.1rem;
+    }
+    
+    .confusion-matrix-container .card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+    
+    .confusion-matrix-container .card-header {
+        font-weight: 600;
+        padding: 12px 15px;
+    }
+    
+    .confusion-matrix-container .card-body {
+        padding: 20px;
+    }
+    
+    /* Tabla de matriz de confusión */
+    .confusion-matrix-container .table {
+        margin-bottom: 0;
+    }
+    
+    .confusion-matrix-container .table th {
+        background-color: #e3f2fd;
+        border-color: #90caf9;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+        padding: 12px 8px;
+        font-size: 0.9rem;
+    }
+    
+    .confusion-matrix-container .table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 12px 8px;
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    
+    /* Colores para las celdas de la matriz */
+    .confusion-matrix-container .table .text-success {
+        color: #28a745 !important;
+        font-weight: 700;
+    }
+    
+    .confusion-matrix-container .table .text-danger {
+        color: #dc3545 !important;
+        font-weight: 700;
+    }
+    
+    /* Lista de interpretación */
+    .confusion-matrix-container .list-group {
+        border: none;
+        box-shadow: none;
+    }
+    
+    .confusion-matrix-container .list-group-item {
+        border: 1px solid #e9ecef;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        padding: 12px 15px;
+        background-color: #f8f9fa;
+    }
+    
+    .confusion-matrix-container .list-group-item:last-child {
+        margin-bottom: 0;
+    }
+    
+    .confusion-matrix-container .list-group-item strong {
+        color: #495057;
+        font-weight: 600;
+        margin-right: 8px;
+    }
+    
+    .confusion-matrix-container .list-group-item .text-success {
+        color: #28a745 !important;
+        font-weight: 500;
+    }
+    
+    .confusion-matrix-container .list-group-item .text-danger {
+        color: #dc3545 !important;
+        font-weight: 500;
+    }
+    
+    /* Responsive para matriz de confusión */
+    @media (max-width: 768px) {
+        .confusion-matrix-container .table th,
+        .confusion-matrix-container .table td {
+            padding: 8px 4px;
+            font-size: 0.9rem;
+        }
+        
+        .confusion-matrix-container .list-group-item {
+            padding: 10px 12px;
+        }
+    }
+    
+    /* ===== ESTILOS PARA WIDGET DE COEFICIENTES ===== */
+    
+    .coefficients-container {
+        padding: 15px;
+    }
+    
+    .coefficients-container h6 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #0d6efd;
+        font-size: 1.1rem;
+    }
+    
+    .coefficients-container .card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+    
+    .coefficients-container .card-header {
+        font-weight: 600;
+        padding: 12px 15px;
+    }
+    
+    .coefficients-container .card-body {
+        padding: 20px;
+    }
+    
+    /* Tabla de coeficientes */
+    .coefficients-container .table {
+        margin-bottom: 0;
+    }
+    
+    .coefficients-container .table th {
+        background-color: #fff3cd;
+        border-color: #ffeaa7;
+        font-weight: 600;
+        text-align: center;
+        vertical-align: middle;
+        padding: 12px 8px;
+        font-size: 0.85rem;
+    }
+    
+    .coefficients-container .table td {
+        text-align: center;
+        vertical-align: middle;
+        padding: 10px 8px;
+        font-size: 0.9rem;
+    }
+    
+    .coefficients-container .table td:first-child {
+        text-align: left;
+        font-weight: 600;
+    }
+    
+    .coefficients-container .table td:last-child {
+        text-align: left;
+        font-size: 0.8rem;
+        color: #6c757d;
+    }
+    
+    /* Badges de p-valor */
+    .coefficients-container .badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+    }
+    
+    /* Alert de interpretación */
+    .coefficients-container .alert {
+        border: none;
+        background-color: #e3f2fd;
+        color: #0d47a1;
+        border-radius: 8px;
+        padding: 15px;
+    }
+    
+    .coefficients-container .alert-heading {
+        color: #1565c0;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+    
+    .coefficients-container .alert ul {
+        margin-bottom: 0;
+        padding-left: 20px;
+    }
+    
+    .coefficients-container .alert li {
+        margin-bottom: 5px;
+        line-height: 1.4;
+    }
+    
+    .coefficients-container .alert li:last-child {
+        margin-bottom: 0;
+    }
+    
+    /* Responsive para coeficientes */
+    @media (max-width: 768px) {
+        .coefficients-container .table th,
+        .coefficients-container .table td {
+            padding: 8px 4px;
+            font-size: 0.8rem;
+        }
+        
+        .coefficients-container .alert {
+            padding: 12px;
+        }
+    }
+    
+    /* ===== ESTILOS PARA WIDGET DE CURVA ROC ===== */
+    
+    .roc-curve-container {
+        padding: 15px;
+    }
+    
+    .roc-curve-container h6 {
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #0d6efd;
+        font-size: 1.1rem;
+    }
+    
+    .roc-curve-container .card {
+        border: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin-bottom: 15px;
+    }
+    
+    .roc-curve-container .card-header {
+        font-weight: 600;
+        padding: 12px 15px;
+    }
+    
+    .roc-curve-container .card-body {
+        padding: 20px;
+    }
+    
+    /* Contenedor del gráfico ROC */
+    .roc-curve-container #roc-chart {
+        border-radius: 8px;
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+    }
+    
+    /* Métricas de AUC */
+    .roc-curve-container .text-center {
+        padding: 15px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        border: 1px solid #e9ecef;
+        margin: 10px 0;
+    }
+    
+    .roc-curve-container .text-center h6 {
+        color: #495057;
+        font-weight: 600;
+        margin-bottom: 8px;
+        font-size: 0.9rem;
+    }
+    
+    .roc-curve-container .text-center .h4 {
+        font-weight: 700;
+        margin-bottom: 5px;
+    }
+    
+    .roc-curve-container .text-center small {
+        color: #6c757d;
+        font-weight: 500;
+    }
+    
+    /* Responsive para curva ROC */
+    @media (max-width: 768px) {
+        .roc-curve-container .text-center {
+            padding: 12px;
+            margin: 8px 0;
+        }
+        
+        .roc-curve-container .text-center h6 {
+            font-size: 0.85rem;
+        }
+        
+        .roc-curve-container .text-center .h4 {
+            font-size: 1.5rem;
+        }
+    }
+</style> 

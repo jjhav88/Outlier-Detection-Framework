@@ -1,0 +1,293 @@
+/* Specific CSS styles for analyze_viz module */
+
+/* Asegurar que las pestañas sean completamente independientes */
+.tab-content {
+    position: relative;
+    min-height: 400px;
+}
+
+.tab-pane {
+    display: none;
+    padding-top: 0;
+    margin-top: 0;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-pane.fade {
+    opacity: 0;
+    transition: opacity 0.15s linear;
+}
+
+.tab-pane.fade.show {
+    opacity: 1;
+}
+
+/* Estilos para las pestañas de análisis */
+.nav-tabs .nav-link {
+    color: #495057;
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    color: #28a745;
+    border-bottom-color: #28a745;
+}
+
+.nav-tabs .nav-link.active {
+    color: #28a745;
+    border-bottom-color: #28a745;
+    background-color: transparent;
+    font-weight: 600;
+}
+
+/* Estilos para los expanders */
+.accordion-item {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin-bottom: 0.5rem;
+}
+
+.accordion-button {
+    background-color: #f8f9fa;
+    border: none;
+    color: #495057;
+    font-weight: 500;
+    padding: 1rem;
+}
+
+.accordion-button:hover {
+    background-color: #e9ecef;
+    color: #28a745;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #28a745;
+    color: white;
+}
+
+.accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(40, 167, 69, 0.25);
+}
+
+/* Asegurar que las flechas del acordeón sean visibles con color distintivo */
+.accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23000000'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    background-size: 16px 12px;
+    transition: transform 0.2s ease-in-out;
+    opacity: 1 !important;
+}
+
+.accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23ffffff'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
+    transform: rotate(-180deg);
+    opacity: 1 !important;
+}
+
+/* Estilos para las tablas de resultados */
+.results-table {
+    font-size: 0.9rem;
+}
+
+.results-table th {
+    background-color: #f8f9fa;
+    border-color: #dee2e6;
+    font-weight: 600;
+    color: #495057;
+}
+
+.results-table td {
+    border-color: #dee2e6;
+    vertical-align: middle;
+}
+
+
+
+/* Estilos para los gráficos */
+.plotly-graph-div {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    margin: 1rem 0;
+}
+
+/* Estilos para los paneles de dataset */
+.dataset-panel {
+    border: 2px solid #dee2e6;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dataset-panel:hover {
+    border-color: #28a745;
+    box-shadow: 0 0.125rem 0.25rem rgba(40, 167, 69, 0.075);
+}
+
+.dataset-panel.selected {
+    border-color: #28a745;
+    background-color: rgba(40, 167, 69, 0.05);
+}
+
+/* Estilos para los botones de acción */
+.btn-primary {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-success {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-success:hover {
+    background-color: #138496;
+    border-color: #117a8b;
+}
+
+/* Estilos para las alertas informativas */
+.alert-info {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.alert-secondary {
+    background-color: #e2e3e5;
+    border-color: #d6d8db;
+    color: #383d41;
+}
+
+/* Estilos para los contenedores de resultados */
+.results-container {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* Estilos para las estadísticas descriptivas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+.stat-card {
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-top: 0.5rem;
+}
+
+/* Estilos para los indicadores de significancia */
+.significant {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.not-significant {
+    color: #6c757d;
+}
+
+/* Estilos para las tablas de contingencia */
+.contingency-table {
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.contingency-table table {
+    font-size: 0.875rem;
+}
+
+/* Estilos para los gráficos de visualización */
+.visualization-container {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background-color: white;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+}
+
+.visualization-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+/* Estilos para los loaders */
+.loading-spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid #28a745;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Estilos para los mensajes de error */
+.error-message {
+    color: #dc3545;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    margin: 1rem 0;
+}
+
+/* Estilos para los mensajes de éxito */
+.success-message {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    margin: 1rem 0;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .results-table {
+        font-size: 0.8rem;
+    }
+    
+    .accordion-button {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+} 

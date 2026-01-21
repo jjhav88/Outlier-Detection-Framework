@@ -1,0 +1,527 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fas fa-cogs me-2"></i>
+                        Preprocesamiento de Datos
+                    </h4>
+                    <p class="card-text">
+                        Módulo de preprocesamiento de datos. Aquí podrás limpiar, transformar y preparar tus datasets para el análisis de outliers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset Selection -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-database me-2"></i>
+                        Seleccionar Dataset para Análisis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="preprocessDatasetSelectionContainer">
+                        <!-- Los paneles de datasets se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current State Dashboard -->
+    <div class="row mb-4" id="currentStateSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Estado Actual de los Datos
+                        <span id="selectedDatasetName" class="badge bg-primary ms-2"></span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="currentStateCards">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preprocessing Tools -->
+    <div class="row mb-4" id="preprocessingToolsSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-tools me-2"></i>
+                        Herramientas de Preprocesamiento
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Missing Values -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-exclamation-triangle me-2 text-warning"></i>
+                                        Valores Faltantes
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Estrategia de manejo:</label>
+                                        <select class="form-select" id="missingValuesStrategy">
+                                            <option value="drop">Eliminar filas con valores faltantes</option>
+                                            <option value="fill_mean">Rellenar con media (numéricas)</option>
+                                            <option value="fill_median">Rellenar con mediana (numéricas)</option>
+                                            <option value="fill_mode">Rellenar con moda (cualitativas)</option>
+                                            <option value="fill_constant">Rellenar con valor constante</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3" id="constantValueDiv" style="display: none;">
+                                        <label class="form-label">Valor constante:</label>
+                                        <input type="text" class="form-control" id="constantValue" placeholder="Ingresa el valor">
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button class="btn btn-warning btn-sm" id="handleMissingValuesBtn">
+                                            <i class="fas fa-broom me-2"></i>
+                                            Aplicar
+                                        </button>
+                                        <button class="btn btn-outline-info btn-sm" id="missingValuesInfoBtn" data-bs-toggle="modal" data-bs-target="#missingValuesInfoModal">
+                                            <i class="fas fa-info-circle me-2"></i>
+                                            Información
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Duplicates -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-copy me-2 text-info"></i>
+                                        Duplicados
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <label class="form-label">Estrategia de manejo:</label>
+                                        <select class="form-select" id="duplicatesStrategy">
+                                            <option value="drop">Eliminar duplicados</option>
+                                            <option value="keep_first">Mantener primera ocurrencia</option>
+                                            <option value="keep_last">Mantener última ocurrencia</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-info btn-sm" id="handleDuplicatesBtn">
+                                        <i class="fas fa-filter me-2"></i>
+                                        Aplicar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Data Types -->
+                        <div class="col-md-6 mb-3">
+                            <div class="card h-100" id="dataTypesCard">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-tags me-2 text-success"></i>
+                                        Conversión de Tipos de Datos
+                                    </h6>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="activateDataTypesSwitch">
+                                        <label class="form-check-label" for="activateDataTypesSwitch">
+                                            <small>Activar Conversión</small>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="card-body" id="dataTypesCardBody" style="opacity: 0.5; pointer-events: none;">
+                                    <div class="mb-3">
+                                        <label class="form-label">Seleccionar variable:</label>
+                                        <select class="form-select" id="variableToConvert">
+                                            <option value="">Selecciona una variable...</option>
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Convertir a:</label>
+                                        <select class="form-select" id="targetDataType">
+                                            <option value="numeric">Numérico</option>
+                                            <option value="categorical">Categórico</option>
+                                            <option value="datetime">Fecha/Hora</option>
+                                            <option value="boolean">Booleano</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn btn-success btn-sm" id="handleDataTypesBtn">
+                                        <i class="fas fa-exchange-alt me-2"></i>
+                                        Convertir
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Apply All Changes -->
+                    <div class="row mt-3">
+                        <div class="col-12 text-center">
+                            <button class="btn btn-primary btn-lg" id="applyAllChangesBtn">
+                                <i class="fas fa-play me-2"></i>
+                                Aplicar Todos los Cambios
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Final State Dashboard -->
+    <div class="row mb-4" id="finalStateSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-check-circle me-2 text-success"></i>
+                        Estado Final de los Datos
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row" id="finalStateCards">
+                        <!-- Cards will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Processed Dataset -->
+    <div class="row mb-4" id="saveSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-save me-2"></i>
+                        Guardar Dataset Procesado
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row align-items-end">
+                        <div class="col-md-6">
+                            <label for="processedDatasetName" class="form-label">Nombre del dataset procesado:</label>
+                            <input type="text" class="form-control" id="processedDatasetName" placeholder="Ej: dataset_limpio">
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-success btn-lg" id="saveProcessedDatasetBtn">
+                                <i class="fas fa-save me-2"></i>
+                                Guardar Dataset
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Información sobre Valores Faltantes -->
+    <div class="modal fade" id="missingValuesInfoModal" tabindex="-1" aria-labelledby="missingValuesInfoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-white">
+                    <h5 class="modal-title" id="missingValuesInfoModalLabel">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Guía de Estrategias para Valores Faltantes
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-warning">
+                        <i class="fas fa-lightbulb me-2"></i>
+                        <strong>Recomendación General:</strong> Se recomienda usar estrategias de imputación cuando los valores faltantes representan menos del 5% de los datos totales. Para porcentajes mayores, considere eliminar las filas o investigar la causa raíz de los valores faltantes.
+                    </div>
+
+                    <div class="accordion" id="strategiesAccordion">
+                        <!-- Eliminar filas -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingDrop">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDrop" aria-expanded="true" aria-controls="collapseDrop">
+                                    <i class="fas fa-trash-alt me-2 text-danger"></i>
+                                    <strong>Eliminar filas con valores faltantes</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseDrop" class="accordion-collapse collapse show" aria-labelledby="headingDrop" data-bs-parent="#strategiesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 class="text-danger">¿Cuándo usar?</h6>
+                                            <ul>
+                                                <li>Cuando los valores faltantes representan menos del 5% de los datos</li>
+                                                <li>Cuando la eliminación no afecta significativamente el tamaño de la muestra</li>
+                                                <li>Cuando los valores faltantes son completamente aleatorios (MCAR)</li>
+                                                <li>En análisis exploratorios donde la simplicidad es prioritaria</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-danger">Ventajas:</h6>
+                                            <ul>
+                                                <li>Mantiene la integridad de los datos originales</li>
+                                                <li>No introduce sesgos artificiales</li>
+                                                <li>Método simple y directo</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-danger">Desventajas:</h6>
+                                            <ul>
+                                                <li>Pérdida de información valiosa</li>
+                                                <li>Reducción del tamaño de la muestra</li>
+                                                <li>Puede afectar la representatividad de los datos</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-percentage fa-3x text-danger mb-2"></i>
+                                                    <h6>Umbral Recomendado</h6>
+                                                    <p class="mb-0"><strong>&lt; 5%</strong> de valores faltantes</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rellenar con media -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingMean">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMean" aria-expanded="false" aria-controls="collapseMean">
+                                    <i class="fas fa-calculator me-2 text-primary"></i>
+                                    <strong>Rellenar con media (numéricas)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseMean" class="accordion-collapse collapse" aria-labelledby="headingMean" data-bs-parent="#strategiesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 class="text-primary">¿Cuándo usar?</h6>
+                                            <ul>
+                                                <li>Para variables numéricas continuas</li>
+                                                <li>Cuando la distribución de datos es aproximadamente normal</li>
+                                                <li>Cuando los valores faltantes son aleatorios</li>
+                                                <li>En variables donde la media es representativa del centro de los datos</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-primary">Ventajas:</h6>
+                                            <ul>
+                                                <li>Mantiene el tamaño de la muestra</li>
+                                                <li>Preserva la media de la variable</li>
+                                                <li>Método ampliamente aceptado</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-primary">Desventajas:</h6>
+                                            <ul>
+                                                <li>Reduce la varianza de la variable</li>
+                                                <li>Puede crear valores artificiales</li>
+                                                <li>No es adecuado para distribuciones sesgadas</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-chart-line fa-3x text-primary mb-2"></i>
+                                                    <h6>Ideal para</h6>
+                                                    <p class="mb-0"><strong>Distribuciones normales</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rellenar con mediana -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingMedian">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMedian" aria-expanded="false" aria-controls="collapseMedian">
+                                    <i class="fas fa-sort-numeric-up me-2 text-success"></i>
+                                    <strong>Rellenar con mediana (numéricas)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseMedian" class="accordion-collapse collapse" aria-labelledby="headingMedian" data-bs-parent="#strategiesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 class="text-success">¿Cuándo usar?</h6>
+                                            <ul>
+                                                <li>Para variables numéricas con distribuciones sesgadas</li>
+                                                <li>Cuando hay outliers que afectan la media</li>
+                                                <li>En variables donde la mediana es más representativa</li>
+                                                <li>Para datos que no siguen una distribución normal</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-success">Ventajas:</h6>
+                                            <ul>
+                                                <li>Robusto a outliers</li>
+                                                <li>Mantiene el tamaño de la muestra</li>
+                                                <li>Preserva la mediana de la variable</li>
+                                                <li>Adecuado para distribuciones asimétricas</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-success">Desventajas:</h6>
+                                            <ul>
+                                                <li>Puede crear valores repetitivos</li>
+                                                <li>Reduce la variabilidad de los datos</li>
+                                                <li>No preserva la media original</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-shield-alt fa-3x text-success mb-2"></i>
+                                                    <h6>Ideal para</h6>
+                                                    <p class="mb-0"><strong>Datos con outliers</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rellenar con moda -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingMode">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMode" aria-expanded="false" aria-controls="collapseMode">
+                                    <i class="fas fa-chart-bar me-2 text-warning"></i>
+                                    <strong>Rellenar con moda (cualitativas)</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseMode" class="accordion-collapse collapse" aria-labelledby="headingMode" data-bs-parent="#strategiesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 class="text-warning">¿Cuándo usar?</h6>
+                                            <ul>
+                                                <li>Para variables categóricas o cualitativas</li>
+                                                <li>Cuando hay una categoría claramente dominante</li>
+                                                <li>En variables nominales o ordinales</li>
+                                                <li>Cuando la moda es representativa de la mayoría</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-warning">Ventajas:</h6>
+                                            <ul>
+                                                <li>Mantiene el tamaño de la muestra</li>
+                                                <li>Preserva la distribución de categorías</li>
+                                                <li>Método intuitivo para variables cualitativas</li>
+                                                <li>No afecta la estructura de categorías</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-warning">Desventajas:</h6>
+                                            <ul>
+                                                <li>Puede crear desbalance en las categorías</li>
+                                                <li>No es adecuado para variables numéricas</li>
+                                                <li>Puede sesgar la distribución si la moda no es representativa</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-tags fa-3x text-warning mb-2"></i>
+                                                    <h6>Ideal para</h6>
+                                                    <p class="mb-0"><strong>Variables categóricas</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Rellenar con valor constante -->
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingConstant">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseConstant" aria-expanded="false" aria-controls="collapseConstant">
+                                    <i class="fas fa-hand-holding-usd me-2 text-info"></i>
+                                    <strong>Rellenar con valor constante</strong>
+                                </button>
+                            </h2>
+                            <div id="collapseConstant" class="accordion-collapse collapse" aria-labelledby="headingConstant" data-bs-parent="#strategiesAccordion">
+                                <div class="accordion-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h6 class="text-info">¿Cuándo usar?</h6>
+                                            <ul>
+                                                <li>Cuando se tiene conocimiento experto sobre el valor apropiado</li>
+                                                <li>Para valores que representan "ausencia" o "no aplica"</li>
+                                                <li>En variables donde un valor específico tiene significado especial</li>
+                                                <li>Cuando se requiere consistencia con otros sistemas</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-info">Ventajas:</h6>
+                                            <ul>
+                                                <li>Control total sobre el valor de imputación</li>
+                                                <li>Puede reflejar conocimiento del dominio</li>
+                                                <li>Mantiene el tamaño de la muestra</li>
+                                                <li>Útil para valores con significado específico</li>
+                                            </ul>
+                                            
+                                            <h6 class="text-info">Desventajas:</h6>
+                                            <ul>
+                                                <li>Requiere conocimiento experto</li>
+                                                <li>Puede introducir sesgos si el valor no es apropiado</li>
+                                                <li>No se basa en la distribución de los datos</li>
+                                                <li>Puede crear patrones artificiales</li>
+                                            </ul>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="card bg-light">
+                                                <div class="card-body text-center">
+                                                    <i class="fas fa-user-tie fa-3x text-info mb-2"></i>
+                                                    <h6>Requiere</h6>
+                                                    <p class="mb-0"><strong>Conocimiento experto</strong></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4">
+                        <div class="card border-primary">
+                            <div class="card-header bg-primary text-white">
+                                <h6 class="mb-0">
+                                    <i class="fas fa-lightbulb me-2"></i>
+                                    Consejos Adicionales
+                                </h6>
+                            </div>
+                            <div class="card-body">
+                                <ul class="mb-0">
+                                    <li><strong>Analice el patrón de valores faltantes:</strong> Determine si son aleatorios o sistemáticos</li>
+                                    <li><strong>Considere el contexto:</strong> El método debe ser apropiado para el tipo de análisis</li>
+                                    <li><strong>Documente su elección:</strong> Registre la estrategia utilizada y su justificación</li>
+                                    <li><strong>Evalúe el impacto:</strong> Compare los resultados antes y después del tratamiento</li>
+                                    <li><strong>Considere múltiples métodos:</strong> Para análisis críticos, pruebe diferentes estrategias</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

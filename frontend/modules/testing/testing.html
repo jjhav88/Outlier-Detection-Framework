@@ -1,0 +1,368 @@
+<!-- Módulo de Testing y Pruebas -->
+<div class="testing-module">
+    <div class="container-fluid py-4">
+        <div class="row">
+            <div class="col-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-header bg-success text-white">
+                        <h4 class="mb-0">
+                            <i class="fas fa-vial me-2"></i>
+                            Suite de Pruebas - SISTAOUT
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        <p class="text-muted">
+                            Ejecuta pruebas automatizadas para validar la funcionalidad, rendimiento y calidad del sistema.
+                            Visualiza los resultados y reportes directamente desde la interfaz.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sistema de Pestañas -->
+        <ul class="nav nav-tabs mb-4" id="testingTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="functional-tests-tab" data-bs-toggle="tab" data-bs-target="#functional-tests" type="button" role="tab" aria-controls="functional-tests" aria-selected="true">
+                    <i class="fas fa-check-circle me-2"></i>
+                    Pruebas Funcionales
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="performance-tests-tab" data-bs-toggle="tab" data-bs-target="#performance-tests" type="button" role="tab" aria-controls="performance-tests" aria-selected="false">
+                    <i class="fas fa-tachometer-alt me-2"></i>
+                    Pruebas de Rendimiento
+                </button>
+            </li>
+        </ul>
+
+        <!-- Contenido de las Pestañas -->
+        <div class="tab-content" id="testingTabContent">
+            <!-- Pestaña de Pruebas Funcionales -->
+            <div class="tab-pane fade show active" id="functional-tests" role="tabpanel" aria-labelledby="functional-tests-tab">
+                <!-- Panel de Control de Pruebas -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-play-circle me-2"></i>
+                                    Ejecutar Pruebas Funcionales
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Tipo de Prueba</label>
+                                        <select class="form-select" id="testTypeSelect">
+                                            <option value="">Todas las pruebas</option>
+                                            <option value="regression">Pruebas de Regresión</option>
+                                            <option value="functional">Pruebas Funcionales</option>
+                                            <option value="whitebox">Pruebas de Caja Blanca</option>
+                                            <option value="blackbox">Pruebas de Caja Negra</option>
+                                        </select>
+                                        <small class="form-text text-muted">
+                                            Selecciona el tipo de prueba a ejecutar o deja en blanco para ejecutar todas
+                                        </small>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label fw-bold">Opciones</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="verboseCheck" checked>
+                                            <label class="form-check-label" for="verboseCheck">
+                                                Salida detallada (verbose)
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" id="coverageCheck">
+                                            <label class="form-check-label" for="coverageCheck">
+                                                Incluir reporte de cobertura
+                                            </label>
+                                            <small class="form-text text-muted d-block mt-1">
+                                                <i class="fas fa-info-circle me-1"></i>
+                                                Muestra qué porcentaje del código está cubierto por las pruebas
+                                            </small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button class="btn btn-success" id="runTestsBtn">
+                                        <i class="fas fa-play me-2"></i>
+                                        Ejecutar Pruebas
+                                    </button>
+                                    <button class="btn btn-outline-secondary" id="stopTestsBtn" disabled>
+                                        <i class="fas fa-stop me-2"></i>
+                                        Detener
+                                    </button>
+                                    <button class="btn btn-outline-info" id="refreshReportsBtn">
+                                        <i class="fas fa-sync-alt me-2"></i>
+                                        Actualizar Reportes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de Progreso -->
+                <div class="row mb-4" id="progressPanel" style="display: none;">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                    Ejecutando Pruebas...
+                                </h6>
+                                <div class="progress mb-2" style="height: 25px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                         role="progressbar" 
+                                         id="testProgressBar" 
+                                         style="width: 0%">
+                                        0%
+                                    </div>
+                                </div>
+                                <div id="testStatusText" class="text-muted small"></div>
+                                <div id="testOutput" class="mt-3">
+                                    <pre class="bg-dark text-light p-3 rounded" style="max-height: 200px; overflow-y: auto; font-size: 12px;" id="testOutputText"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultados de Pruebas -->
+                <div class="row mb-4" id="resultsPanel" style="display: none;">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-light">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-line me-2"></i>
+                                    Resultados de las Pruebas
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="testResultsSummary"></div>
+                                <div id="testResultsDetails" class="mt-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reportes Disponibles -->
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-file-alt me-2"></i>
+                                    Reportes Disponibles
+                                    <span class="badge bg-secondary ms-2" id="reportsCount">0</span>
+                                </h5>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label class="form-check-label small text-muted me-2" for="showAllReports">
+                                        Mostrar todos:
+                                    </label>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="showAllReports">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div id="reportsList">
+                                    <div class="text-center text-muted py-4">
+                                        <i class="fas fa-file-alt fa-3x mb-3"></i>
+                                        <p>No hay reportes disponibles. Ejecuta pruebas para generar reportes.</p>
+                                    </div>
+                                </div>
+                                <!-- Paginación -->
+                                <nav aria-label="Paginación de reportes" id="reportsPagination" style="display: none;">
+                                    <ul class="pagination justify-content-center mb-0" id="paginationList">
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pestaña de Pruebas de Rendimiento -->
+            <div class="tab-pane fade" id="performance-tests" role="tabpanel" aria-labelledby="performance-tests-tab">
+                <!-- Panel de Pruebas de Rendimiento -->
+                <div class="row mb-4">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-tachometer-alt me-2"></i>
+                                    Pruebas de Rendimiento y Carga
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-muted mb-4">
+                                    Ejecuta pruebas de carga para evaluar el rendimiento del sistema bajo diferentes condiciones.
+                                    Simula múltiples usuarios concurrentes accediendo a la API.
+                                </p>
+                                
+                                <div class="row mb-3">
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">Usuarios Concurrentes</label>
+                                        <input type="number" class="form-control" id="loadTestUsers" value="10" min="1" max="100">
+                                        <small class="form-text text-muted">Número de usuarios simultáneos</small>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">Tasa de Spawn</label>
+                                        <input type="number" class="form-control" id="loadTestSpawnRate" value="2" min="1" max="10" step="0.5">
+                                        <small class="form-text text-muted">Usuarios por segundo</small>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">Duración</label>
+                                        <input type="text" class="form-control" id="loadTestRunTime" value="60s" placeholder="60s">
+                                        <small class="form-text text-muted">Ej: 60s, 2m, 5m</small>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label class="form-label fw-bold">Host</label>
+                                        <input type="text" class="form-control" id="loadTestHost" value="http://localhost:8000">
+                                        <small class="form-text text-muted">URL del servidor</small>
+                                    </div>
+                                </div>
+                                
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <button class="btn btn-info" id="runLoadTestBtn">
+                                        <i class="fas fa-rocket me-2"></i>
+                                        Ejecutar Pruebas de Carga
+                                    </button>
+                                    <button class="btn btn-outline-secondary" id="stopLoadTestBtn" disabled>
+                                        <i class="fas fa-stop me-2"></i>
+                                        Detener
+                                    </button>
+                                    <button class="btn btn-outline-primary" id="viewPerformanceMetricsBtn">
+                                        <i class="fas fa-chart-bar me-2"></i>
+                                        Ver Métricas en Tiempo Real
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de Progreso de Pruebas de Carga -->
+                <div class="row mb-4" id="loadTestProgressPanel" style="display: none;">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-body">
+                                <h6 class="mb-3">
+                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                    Ejecutando Pruebas de Carga...
+                                </h6>
+                                <div class="progress mb-2" style="height: 25px;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated bg-info" 
+                                         role="progressbar" 
+                                         id="loadTestProgressBar" 
+                                         style="width: 0%">
+                                        0%
+                                    </div>
+                                </div>
+                                <div id="loadTestStatusText" class="text-muted small"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultados de Pruebas de Carga -->
+                <div class="row mb-4" id="loadTestResultsPanel" style="display: none;">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-area me-2"></i>
+                                    Resultados de Pruebas de Carga
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div id="loadTestResultsSummary"></div>
+                                <div id="loadTestResultsDetails" class="mt-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Panel de Métricas de Rendimiento -->
+                <div class="row mb-4" id="performanceMetricsPanel" style="display: none;">
+                    <div class="col-12">
+                        <div class="card shadow-sm">
+                            <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-chart-bar me-2"></i>
+                                    Métricas de Rendimiento en Tiempo Real
+                                </h5>
+                                <button class="btn btn-sm btn-light" id="closeMetricsPanelBtn">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div id="performanceMetricsContent"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Visualizar Reportes -->
+<div class="modal fade" id="reportViewerModal" tabindex="-1" aria-labelledby="reportViewerModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="reportViewerModalLabel">
+                    <i class="fas fa-file-alt me-2"></i>
+                    Visualizador de Reportes
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body p-0" style="height: calc(100vh - 120px);">
+                <div class="d-flex h-100">
+                    <!-- Panel de Tabs -->
+                    <div class="w-100 h-100 d-flex flex-column">
+                        <ul class="nav nav-tabs border-bottom" id="reportTabs" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="html-tab" data-bs-toggle="tab" data-bs-target="#html-content" type="button" role="tab">
+                                    <i class="fas fa-code me-2"></i>Reporte HTML
+                                </button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="json-tab" data-bs-toggle="tab" data-bs-target="#json-content" type="button" role="tab">
+                                    <i class="fas fa-brackets-curly me-2"></i>Datos JSON
+                                </button>
+                            </li>
+                        </ul>
+                        <div class="tab-content flex-grow-1" id="reportTabContent" style="overflow: hidden;">
+                            <div class="tab-pane fade show active h-100" id="html-content" role="tabpanel" style="height: 100%; overflow-y: auto;">
+                                <div id="reportSummaryContent" class="p-4">
+                                    <!-- Contenido del resumen del reporte se cargará aquí -->
+                                </div>
+                                <!-- Iframe para reportes HTML de Locust -->
+                                <iframe id="loadTestReportIframe" 
+                                        style="display: none; width: 100%; height: 100%; border: none;" 
+                                        sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+                                        loading="lazy"></iframe>
+                            </div>
+                            <div class="tab-pane fade h-100" id="json-content" role="tabpanel" style="height: 100%; overflow-y: auto;">
+                                <div class="p-3">
+                                    <pre id="jsonReportContent" class="bg-dark text-light p-3 rounded" style="font-size: 12px; max-height: 100%; overflow-y: auto;"></pre>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="downloadReportBtn">
+                    <i class="fas fa-download me-2"></i>Descargar Reporte
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

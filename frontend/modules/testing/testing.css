@@ -1,0 +1,53 @@
+/* Estilos para el módulo de Testing */
+
+.testing-module {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.testing-module .card {
+    border: none;
+    border-radius: 8px;
+}
+
+.testing-module .card-header {
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+}
+
+.testing-module .progress {
+    border-radius: 10px;
+}
+
+.testing-module .progress-bar {
+    transition: width 0.3s ease;
+}
+
+.testing-module #testOutputText {
+    font-family: 'Courier New', monospace;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.testing-module .accordion-button {
+    font-weight: 500;
+}
+
+.testing-module .badge {
+    font-size: 0.85em;
+    padding: 0.35em 0.65em;
+}
+
+.testing-module table {
+    font-size: 0.9em;
+}
+
+.testing-module .btn {
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+.testing-module .card-body {
+    padding: 1.5rem;
+}
+

@@ -1,0 +1,785 @@
+/* Estilos específicos para el módulo de detección de outliers */
+
+/* Estilos para los paneles de selección de datasets */
+.dataset-selection-panel {
+    height: 100%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    min-height: 140px;
+}
+
+.dataset-selection-panel:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dataset-selection-panel.selected {
+    border-color: #0d6efd;
+    background-color: rgba(13, 110, 253, 0.05);
+}
+
+.dataset-selection-panel.processed-dataset {
+    border-left: 4px solid #198754;
+    background-color: rgba(25, 135, 84, 0.05);
+}
+
+.dataset-selection-panel:not(.processed-dataset) {
+    border-left: 4px solid #0dcaf0;
+    background-color: rgba(13, 202, 240, 0.05);
+}
+
+.dataset-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.dataset-name {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.2;
+}
+
+.dataset-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0d6efd;
+    display: block;
+}
+
+.stat-label {
+    font-size: 0.7rem;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.file-type-icon {
+    font-size: 1.1rem;
+}
+
+.file-type-icon.file-type-csv {
+    color: #198754;
+}
+
+.file-type-icon.file-type-excel {
+    color: #0d6efd;
+}
+
+.select-button {
+    width: 100%;
+    margin-top: auto;
+    font-size: 0.85rem;
+    padding: 0.375rem 0.75rem;
+}
+
+.no-datasets-message {
+    text-align: center;
+    padding: 3rem;
+    color: #6c757d;
+}
+
+.no-datasets-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #dee2e6;
+}
+
+.no-datasets-message h5 {
+    margin-bottom: 1rem;
+    color: #495057;
+}
+
+/* Asegurar que todas las columnas tengan la misma altura */
+/* Estilos específicos para la sección de métodos de detección de outliers */
+.outlier-methods-row .col-md-6 {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.outlier-methods-row .col-md-6 .card {
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.outlier-methods-row .col-md-6 .card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+/* Contenedores de gráficos - SIMPLE */
+.chart-container {
+    min-height: 300px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Forzar centrado de gráficos Plotly */
+.chart-container .plotly-graph-div {
+    margin: 0 auto !important;
+    display: block !important;
+}
+
+/* Estilos para los selectores de variables */
+.form-select:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Estilos para las tarjetas de gráficos */
+.card {
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para los headers de las tarjetas */
+.card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card-header h6 {
+    font-weight: 600;
+    color: #495057;
+}
+
+/* Estilos para la información estadística */
+#statisticalInfo .stat-item {
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    background-color: #f8f9fa;
+    margin-bottom: 0.5rem;
+    border-left: 4px solid #0d6efd;
+}
+
+#statisticalInfo .stat-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 0.875rem;
+}
+
+#statisticalInfo .stat-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0d6efd;
+}
+
+/* Estilos para los iconos de estado */
+.status-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.status-icon.success {
+    background-color: #198754;
+}
+
+.status-icon.warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.status-icon.danger {
+    background-color: #dc3545;
+}
+
+.status-icon.info {
+    background-color: #0dcaf0;
+}
+
+/* Estilos para los mensajes de carga */
+.loading-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    color: #6c757d;
+}
+
+.loading-message i {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+/* Estilos para los tooltips de información */
+.info-tooltip {
+    cursor: help;
+    color: #0d6efd;
+    margin-left: 0.5rem;
+}
+
+/* Estilos para las tablas de estadísticas */
+.stats-table {
+    font-size: 0.875rem;
+}
+
+.stats-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #495057;
+}
+
+.stats-table td {
+    vertical-align: middle;
+}
+
+/* Estilos para los badges de estado */
+.status-badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+/* Estilos para los contenedores de gráficos cuando están vacíos */
+.chart-container.empty {
+    background-color: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 0.375rem;
+}
+
+/* Estilos para los controles de gráficos */
+.chart-controls {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+}
+
+.chart-controls .form-label {
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para los botones de acción */
+.action-button {
+    transition: all 0.2s ease-in-out;
+}
+
+.action-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para las alertas de información */
+.info-alert {
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+    color: #0c5460;
+}
+
+.info-alert .alert-heading {
+    color: #0c5460;
+    font-weight: 600;
+}
+
+/* Estilos para los indicadores de progreso */
+.progress-indicator {
+    height: 4px;
+    background-color: #e9ecef;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-indicator .progress-bar {
+    background: linear-gradient(90deg, #0d6efd, #0dcaf0);
+    transition: width 0.3s ease;
+}
+
+/* Estilos para los modales de información */
+.modal-header {
+    background: linear-gradient(135deg, #0d6efd 0%, #0dcaf0 100%);
+    color: white;
+}
+
+.modal-header .btn-close {
+    filter: invert(1);
+}
+
+/* Estilos para las listas de información */
+.info-list {
+    list-style: none;
+    padding: 0;
+}
+
+.info-list li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info-list li:last-child {
+    border-bottom: none;
+}
+
+.info-list .info-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.info-list .info-value {
+    color: #0d6efd;
+    font-weight: 600;
+}
+
+/* Estilos para los gráficos responsivos */
+@media (max-width: 768px) {
+    .chart-container {
+        min-height: 250px;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .stats-table {
+        font-size: 0.8rem;
+    }
+}
+
+/* Estilos para los estados de hover en las tarjetas */
+.card.interactive {
+    cursor: pointer;
+}
+
+.card.interactive:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Estilos para los indicadores de estado */
+.state-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.state-indicator.active {
+    background-color: #198754;
+}
+
+.state-indicator.inactive {
+    background-color: #6c757d;
+}
+
+.state-indicator.loading {
+    background-color: #ffc107;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+/* Estilos específicos para el gráfico de pastel */
+#generalPieChart {
+    min-height: 350px;
+    overflow: visible !important;
+    padding: 1px;
+}
+
+/* Estilos para la tabla de frecuencias cruzadas */
+#categoryCrossTable table {
+    font-size: 0.85rem;
+}
+
+#categoryCrossTable th,
+#categoryCrossTable td {
+    padding: 0.3rem 0.5rem;
+    vertical-align: middle;
+}
+
+#categoryCrossTable .table-sm th,
+#categoryCrossTable .table-sm td {
+    padding: 0.25rem 0.4rem;
+}
+
+/* Estilos para el análisis de correlación */
+#correlationTable table {
+    font-size: 0.9rem;
+}
+
+#correlationTable th,
+#correlationTable td {
+    padding: 0.4rem 0.6rem;
+    vertical-align: middle;
+}
+
+#correlationLegend .correlation-range {
+    padding: 0.3rem 0.5rem;
+    margin-bottom: 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.85rem;
+}
+
+#correlationLegend .correlation-strength {
+    font-weight: bold;
+    margin-bottom: 0.2rem;
+}
+
+#correlationLegend .correlation-description {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Estilos para la matriz de correlación */
+#correlationVariablesSelect {
+    min-height: 150px;
+}
+
+#correlationMatrixTable table {
+    font-size: 0.85rem;
+}
+
+#correlationMatrixTable th,
+#correlationMatrixTable td {
+    padding: 0.3rem 0.5rem;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#correlationMatrixTable .correlation-value {
+    font-weight: bold;
+}
+
+#correlationMatrixTable .correlation-significance {
+    font-size: 0.7rem;
+    color: #dc3545;
+}
+
+#correlationMatrixTable .diagonal {
+    background-color: #f8f9fa;
+    font-weight: bold;
+}
+
+/* Estilos para los checkboxes de variables */
+.variable-checkbox-item {
+    border: 1px solid #dee2e6;
+    border-radius: 0.375rem;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.variable-checkbox-item:hover {
+    background-color: #f8f9fa;
+    border-color: #0d6efd;
+}
+
+.variable-checkbox-item.selected {
+    background-color: #e7f3ff;
+    border-color: #0d6efd;
+}
+
+.variable-checkbox-item input[type="checkbox"] {
+    margin-right: 0.5rem;
+}
+
+.variable-checkbox-item .variable-name {
+    font-weight: 500;
+    color: #212529;
+}
+
+.variable-checkbox-item .variable-type {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-left: 1.5rem;
+}
+
+#generalPieChart .plotly-graph-div {
+    overflow: visible !important;
+}
+
+/* Colores claros para badges de outliers */
+.bg-light-pink {
+    background-color: #ffe6e6 !important;
+    border: 1px solid #ffb3b3;
+}
+
+.bg-light-blue {
+    background-color: #e6f3ff !important;
+    border: 1px solid #b3d9ff;
+}
+
+.bg-light-yellow {
+    background-color: #fff9e6 !important;
+    border: 1px solid #ffe680;
+}
+
+.bg-light-green {
+    background-color: #e6ffe6 !important;
+    border: 1px solid #b3ffb3;
+}
+
+.bg-light-purple {
+    background-color: #f0e6ff !important;
+    border: 1px solid #d9b3ff;
+}
+
+.bg-light-orange {
+    background-color: #ffede6 !important;
+    border: 1px solid #ffcc99;
+}
+
+/* Container para badges de outliers */
+.outlier-badges-container {
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 0.375rem;
+    border: 1px solid #e9ecef;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.outlier-badge-row {
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.outlier-badge-item {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    margin: 0.1rem;
+    font-weight: 500;
+    min-width: 60px;
+    max-width: 120px;
+    text-align: center;
+    border-radius: 0.375rem;
+    transition: all 0.2s ease;
+    flex: 1;
+    flex-basis: calc(25% - 0.5rem);
+}
+
+.outlier-badge-item:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Estilos para tablas de outliers */
+.outlier-table {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.outlier-table .table {
+    margin-bottom: 0;
+}
+
+.outlier-table .table th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+    font-weight: 600;
+    font-size: 0.85rem;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.outlier-table .table td {
+    vertical-align: middle;
+    font-size: 0.85rem;
+    padding: 0.5rem;
+}
+
+.outlier-table .badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+/* Estilos para lista de outliers finales */
+.outlier-list {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.outlier-tag {
+    display: inline-block;
+    margin: 2px;
+}
+
+/* Responsive para tablas de outliers */
+@media (max-width: 768px) {
+    .outlier-table .table th,
+    .outlier-table .table td {
+        font-size: 0.8rem;
+        padding: 0.4rem;
+    }
+    
+    .outlier-badge-item {
+        flex-basis: calc(50% - 0.5rem);
+        max-width: none;
+    }
+}
+
+/* Scroll personalizado para el contenedor de badges */
+.outlier-badges-container::-webkit-scrollbar {
+    width: 8px;
+}
+
+.outlier-badges-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.outlier-badges-container::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+.outlier-badges-container::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Estilos específicos para accordions de Bootstrap */
+.accordion-item {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.375rem !important;
+    margin-bottom: 0.5rem !important;
+    background-color: #fff !important;
+}
+
+.accordion-item .accordion-button {
+    background-color: #f8f9fa !important;
+    border: none !important;
+    border-radius: 0.375rem !important;
+    padding: 1rem !important;
+    font-weight: 500 !important;
+    color: #495057 !important;
+    transition: all 0.2s ease-in-out !important;
+}
+
+.accordion-item .accordion-button:hover {
+    background-color: #e9ecef !important;
+    color: #212529 !important;
+}
+
+.accordion-item .accordion-button:not(.collapsed) {
+    background-color: #e7f3ff !important;
+    color: #0d6efd !important;
+    box-shadow: inset 0 -1px 0 #dee2e6 !important;
+}
+
+.accordion-item .accordion-button:focus {
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    border-color: #86b7fe !important;
+}
+
+.accordion-item .accordion-button::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%236c757d'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    transition: transform 0.2s ease-in-out !important;
+}
+
+.accordion-item .accordion-button:not(.collapsed)::after {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230d6efd'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+    transform: rotate(-180deg) !important;
+}
+
+.accordion-item .accordion-collapse {
+    border-top: 1px solid #dee2e6 !important;
+}
+
+.accordion-item .accordion-body {
+    background-color: #fff !important;
+    padding: 1rem !important;
+}
+
+/* Estilos para los badges de conteo en los accordions */
+.accordion-button .badge {
+    font-size: 0.75rem !important;
+    padding: 0.25rem 0.5rem !important;
+    border-radius: 0.25rem !important;
+    font-weight: 600 !important;
+}
+
+/* Estilos para el texto del título del accordion */
+.accordion-button .fw-semibold {
+    font-weight: 600 !important;
+    color: inherit !important;
+}
+
+/* Estilos para el contenedor de outliers */
+.outlier-display {
+    margin-top: 1rem !important;
+}
+
+/* Colores claros para badges de outliers */
+
+ 
+
+
+/* Ajuste de layout para resultados de detección: univariados izquierda, multivariados derecha */
+.outlier-methods-row {
+    align-items: stretch;
+}
+
+/* Fuerza 50/50 en >= md (bootstrap ya lo hace con col-md-6, pero garantizamos consistencia) */
+.outlier-methods-row .univariate-col,
+.outlier-methods-row .multivariate-col {
+    flex: 0 0 50%;
+    max-width: 50%;
+}
+
+/* En pantallas pequeñas, ocupar 100% cada uno */
+@media (max-width: 767.98px) {
+    .outlier-methods-row .univariate-col,
+    .outlier-methods-row .multivariate-col {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Asegurar misma altura visual de las tarjetas */
+.outlier-methods-row .card {
+    height: 100%;
+}
+
+ 
+

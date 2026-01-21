@@ -1,0 +1,62 @@
+{
+  "timestamp": "20260101_192352",
+  "date": "2026-01-01T19:24:48.205169",
+  "results": {
+    "regression": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "total": 11,
+      "success": true,
+      "test_type": "regression",
+      "description": "Pruebas de Regresión",
+      "timestamp": "20260101_192352",
+      "output": "============================= test session starts =============================\nplatform win32 -- Python 3.13.2, pytest-9.0.2, pluggy-1.5.0 -- C:\\Users\\alexc\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\ncachedir: .pytest_cache\nmetadata: {'Python': '3.13.2', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.5.0'}, 'Plugins': {'anyio': '3.7.1', 'dash': '3.0.4', 'asyncio': '1.3.0', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1'}}\nrootdir: D:\\Julio\\BACKUP APPS\\ANOUT\nconfigfile: pytest.ini\nplugins: anyio-3.7.1, dash-3.0.4, asyncio-1.3.0, cov-7.0.0, html-4.1.1, metadata-3.1.1\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 11 items\n\ntesting/test_regression.py::TestRegression::test_data_processing_regression PASSED [  9%]\ntesting/test_regression.py::TestRegression::test_outlier_detection_iqr_regression PASSED [ 18%]\ntesting/test_regression.py::TestRegression::test_outlier_detection_zscore_regression PASSED [ 27%]\ntesting/test_regression.py::TestRegression::test_outlier_detection_mad_regression PASSED [ 36%]\ntesting/test_regression.py::TestRegression::test_mann_whitney_regression PASSED [ 45%]\ntesting/test_regression.py::TestRegression::test_descriptive_statistics_regression PASSED [ 54%]\ntesting/test_regression.py::TestRegression::test_clustering_regression PASSED [ 63%]\ntesting/test_regression.py::TestRegression::test_logistic_regression_regression PASSED [ 72%]\ntesting/test_regression.py::TestRegression::test_predictive_model_regression PASSED [ 81%]\ntesting/test_regression.py::TestRegression::test_api_endpoints_structure_regression PASSED [ 90%]\ntesting/test_regression.py::TestRegression::test_data_types_regression PASSED [100%]\n\n- Generated html report: file:///D:/Julio/BACKUP%20APPS/ANOUT/testing/reports/report_regression_20260101_192352.html -\n======================= 11 passed, 2 warnings in 3.78s ========================\n"
+    },
+    "functional": {
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "total": 12,
+      "success": true,
+      "test_type": "functional",
+      "description": "Pruebas Funcionales",
+      "timestamp": "20260101_192352",
+      "output": "============================= test session starts =============================\nplatform win32 -- Python 3.13.2, pytest-9.0.2, pluggy-1.5.0 -- C:\\Users\\alexc\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\ncachedir: .pytest_cache\nmetadata: {'Python': '3.13.2', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.5.0'}, 'Plugins': {'anyio': '3.7.1', 'dash': '3.0.4', 'asyncio': '1.3.0', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1'}}\nrootdir: D:\\Julio\\BACKUP APPS\\ANOUT\nconfigfile: pytest.ini\nplugins: anyio-3.7.1, dash-3.0.4, asyncio-1.3.0, cov-7.0.0, html-4.1.1, metadata-3.1.1\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 12 items\n\ntesting/test_functional.py::TestFunctional::test_upload_dataset_functionality PASSED [  8%]\ntesting/test_functional.py::TestFunctional::test_detect_outliers_iqr_functionality PASSED [ 16%]\ntesting/test_functional.py::TestFunctional::test_detect_outliers_zscore_functionality PASSED [ 25%]\ntesting/test_functional.py::TestFunctional::test_detect_outliers_mad_functionality PASSED [ 33%]\ntesting/test_functional.py::TestFunctional::test_mann_whitney_functionality PASSED [ 41%]\ntesting/test_functional.py::TestFunctional::test_descriptive_statistics_functionality PASSED [ 50%]\ntesting/test_functional.py::TestFunctional::test_clustering_kmeans_functionality PASSED [ 58%]\ntesting/test_functional.py::TestFunctional::test_logistic_regression_functionality PASSED [ 66%]\ntesting/test_functional.py::TestFunctional::test_predictive_model_functionality PASSED [ 75%]\ntesting/test_functional.py::TestFunctional::test_variable_type_detection_functionality PASSED [ 83%]\ntesting/test_functional.py::TestFunctional::test_data_cleaning_functionality PASSED [ 91%]\ntesting/test_functional.py::TestFunctional::test_outlier_combination_strategy_functionality PASSED [100%]\n\n- Generated html report: file:///D:/Julio/BACKUP%20APPS/ANOUT/testing/reports/report_functional_20260101_192352.html -\n============================= 12 passed in 2.62s ==============================\n"
+    },
+    "whitebox": {
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "total": 16,
+      "success": true,
+      "test_type": "whitebox",
+      "description": "Pruebas de Caja Blanca",
+      "timestamp": "20260101_192352",
+      "output": "============================= test session starts =============================\nplatform win32 -- Python 3.13.2, pytest-9.0.2, pluggy-1.5.0 -- C:\\Users\\alexc\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\ncachedir: .pytest_cache\nmetadata: {'Python': '3.13.2', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.5.0'}, 'Plugins': {'anyio': '3.7.1', 'dash': '3.0.4', 'asyncio': '1.3.0', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1'}}\nrootdir: D:\\Julio\\BACKUP APPS\\ANOUT\nconfigfile: pytest.ini\nplugins: anyio-3.7.1, dash-3.0.4, asyncio-1.3.0, cov-7.0.0, html-4.1.1, metadata-3.1.1\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 16 items\n\ntesting/test_whitebox.py::TestWhiteBox::test_iqr_calculation_logic PASSED [  6%]\ntesting/test_whitebox.py::TestWhiteBox::test_zscore_calculation_logic PASSED [ 12%]\ntesting/test_whitebox.py::TestWhiteBox::test_mad_calculation_logic PASSED [ 18%]\ntesting/test_whitebox.py::TestWhiteBox::test_edge_cases_empty_dataframe PASSED [ 25%]\ntesting/test_whitebox.py::TestWhiteBox::test_edge_cases_single_value PASSED [ 31%]\ntesting/test_whitebox.py::TestWhiteBox::test_edge_cases_all_same_values PASSED [ 37%]\ntesting/test_whitebox.py::TestWhiteBox::test_edge_cases_nan_values PASSED [ 43%]\ntesting/test_whitebox.py::TestWhiteBox::test_condition_coverage_normal_data PASSED [ 50%]\ntesting/test_whitebox.py::TestWhiteBox::test_condition_coverage_extreme_outliers PASSED [ 56%]\ntesting/test_whitebox.py::TestWhiteBox::test_loop_coverage_multiple_variables PASSED [ 62%]\ntesting/test_whitebox.py::TestWhiteBox::test_error_handling_invalid_column PASSED [ 68%]\ntesting/test_whitebox.py::TestWhiteBox::test_error_handling_non_numeric_column PASSED [ 75%]\ntesting/test_whitebox.py::TestWhiteBox::test_data_processing_internal_logic PASSED [ 81%]\ntesting/test_whitebox.py::TestWhiteBox::test_statistical_test_internal_logic PASSED [ 87%]\ntesting/test_whitebox.py::TestWhiteBox::test_clustering_internal_logic PASSED [ 93%]\ntesting/test_whitebox.py::TestWhiteBox::test_model_training_internal_logic PASSED [100%]\n\n- Generated html report: file:///D:/Julio/BACKUP%20APPS/ANOUT/testing/reports/report_whitebox_20260101_192352.html -\n============================= 16 passed in 2.13s ==============================\n"
+    },
+    "blackbox": {
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "errors": 0,
+      "total": 13,
+      "success": true,
+      "test_type": "blackbox",
+      "description": "Pruebas de Caja Negra",
+      "timestamp": "20260101_192352",
+      "output": "============================= test session starts =============================\nplatform win32 -- Python 3.13.2, pytest-9.0.2, pluggy-1.5.0 -- C:\\Users\\alexc\\AppData\\Local\\Programs\\Python\\Python313\\python.exe\ncachedir: .pytest_cache\nmetadata: {'Python': '3.13.2', 'Platform': 'Windows-11-10.0.26200-SP0', 'Packages': {'pytest': '9.0.2', 'pluggy': '1.5.0'}, 'Plugins': {'anyio': '3.7.1', 'dash': '3.0.4', 'asyncio': '1.3.0', 'cov': '7.0.0', 'html': '4.1.1', 'metadata': '3.1.1'}}\nrootdir: D:\\Julio\\BACKUP APPS\\ANOUT\nconfigfile: pytest.ini\nplugins: anyio-3.7.1, dash-3.0.4, asyncio-1.3.0, cov-7.0.0, html-4.1.1, metadata-3.1.1\nasyncio: mode=Mode.STRICT, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollecting ... collected 13 items\n\ntesting/test_blackbox.py::TestBlackBox::test_api_health_check PASSED     [  7%]\ntesting/test_blackbox.py::TestBlackBox::test_upload_dataset_blackbox PASSED [ 15%]\ntesting/test_blackbox.py::TestBlackBox::test_get_datasets_list_blackbox PASSED [ 23%]\ntesting/test_blackbox.py::TestBlackBox::test_detect_outliers_blackbox PASSED [ 30%]\ntesting/test_blackbox.py::TestBlackBox::test_invalid_input_handling PASSED [ 38%]\ntesting/test_blackbox.py::TestBlackBox::test_missing_parameters PASSED   [ 46%]\ntesting/test_blackbox.py::TestBlackBox::test_response_format_consistency PASSED [ 53%]\ntesting/test_blackbox.py::TestBlackBox::test_error_messages_clarity PASSED [ 61%]\ntesting/test_blackbox.py::TestBlackBox::test_timeout_handling PASSED     [ 69%]\ntesting/test_blackbox.py::TestBlackBox::test_concurrent_requests PASSED  [ 76%]\ntesting/test_blackbox.py::TestBlackBox::test_data_integrity PASSED       [ 84%]\ntesting/test_blackbox.py::TestBlackBox::test_cors_headers PASSED         [ 92%]\ntesting/test_blackbox.py::TestBlackBox::test_content_type_validation PASSED [100%]\n\n- Generated html report: file:///D:/Julio/BACKUP%20APPS/ANOUT/testing/reports/report_blackbox_20260101_192352.html -\n============================= 13 passed in 29.06s =============================\n"
+    }
+  },
+  "summary": {
+    "total_passed": 52,
+    "total_failed": 0,
+    "total_skipped": 0,
+    "total_tests": 52,
+    "overall_success": true,
+    "success_rate": 100.0
+  }
+}

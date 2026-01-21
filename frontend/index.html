@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANOUT - Análisis de Outliers</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Plotly.js -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/main.css">
+</head>
+<body>
+    <!-- Full Banner Slider -->
+    <header class="full-banner-slider">
+                                                <!-- Slide 1: Cargar Datos -->
+                    <div class="banner-slide active" data-slide="1" style="background-image: url('/images/image1.jpg');" aria-hidden="false" role="tabpanel" aria-labelledby="slide-1-dot">
+                        <div class="slide-overlay">
+                            <div class="container-fluid">
+                                <div class="row align-items-center min-vh-50">
+                                    <div class="col-lg-8 offset-lg-1">
+                            <div class="banner-content">
+                                
+                                    <div class="title-section">
+                                        <h1 class="main-title">ANOUT</h1>
+                                        <h2 class="subtitle">Análisis de Outliers</h2>
+                                        <p class="tagline">Sistema para la Detección y Análisis de Valores Atípicos</p>
+                                    </div>
+                                
+                                <div class="feature-content">
+                                    <h3 class="feature-title">Cargar Datos</h3>
+                                    <p class="feature-description">Sube archivos CSV o Excel y visualiza tus datasets con análisis automático de tipos de variables. Nuestra plataforma detecta automáticamente la estructura de tus datos y te proporciona una vista previa completa.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                                                <!-- Slide 2: Preprocesamiento -->
+                    <div class="banner-slide" data-slide="2" style="background-image: url('/images/image2.jpg');" aria-hidden="true" role="tabpanel" aria-labelledby="slide-2-dot">
+                        <div class="slide-overlay">
+                            <div class="container-fluid">
+                                <div class="row align-items-center min-vh-50">
+                                    <div class="col-lg-8 offset-lg-1">
+                            <div class="banner-content">
+                                
+                                    <div class="title-section">
+                                        <h1 class="main-title">ANOUT</h1>
+                                        <h2 class="subtitle">Análisis de Outliers</h2>
+                                        <p class="tagline">Sistema para la Detección y Análisis de Valores Atípicos</p>
+                                    </div>
+                                
+                                <div class="feature-content">
+                                    <h3 class="feature-title">Preprocesamiento</h3>
+                                    <p class="feature-description">Limpia y prepara tus datos con herramientas avanzadas de transformación y validación. Detecta valores faltantes, duplicados y anomalías en la estructura de tus datasets.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                                                <!-- Slide 3: Detección de Outliers -->
+                    <div class="banner-slide" data-slide="3" style="background-image: url('/images/image3.jpg');" aria-hidden="true" role="tabpanel" aria-labelledby="slide-3-dot">
+                        <div class="slide-overlay">
+                            <div class="container-fluid">
+                                <div class="row align-items-center min-vh-50">
+                                    <div class="col-lg-8 offset-lg-1">
+                            <div class="banner-content">
+                                <div class="title-section">
+                                    <h1 class="main-title">ANOUT</h1>
+                                    <h2 class="subtitle">Análisis de Outliers</h2>
+                                    <p class="tagline">Sistema para la Detección y Análisis de Valores Atípicos</p>
+                                </div>
+                                
+                                <div class="feature-content">
+                                    <h3 class="feature-title">Detección de Outliers</h3>
+                                    <p class="feature-description">Identifica valores atípicos usando múltiples métodos: IQR, Z-Score, Isolation Forest y más. Nuestros algoritmos avanzados te proporcionan resultados precisos y confiables.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+                                                <!-- Slide 4: Análisis y Visualización -->
+                    <div class="banner-slide" data-slide="4" style="background-image: url('/images/image4.jpeg');" aria-hidden="true" role="tabpanel" aria-labelledby="slide-4-dot">
+                        <div class="slide-overlay">
+                            <div class="container-fluid">
+                                <div class="row align-items-center min-vh-50">
+                                    <div class="col-lg-8 offset-lg-1">
+                            <div class="banner-content">
+                                <div class="title-section">
+                                    <h1 class="main-title">ANOUT</h1>
+                                    <h2 class="subtitle">Análisis de Outliers</h2>
+                                    <p class="tagline">Sistema para la Detección y Análisis de Valores Atípicos</p>
+                                </div>
+                                
+                                <div class="feature-content">
+                                    <h3 class="feature-title">Análisis y Visualización</h3>
+                                    <p class="feature-description">Crea gráficos interactivos, reportes detallados y dashboards profesionales. Visualiza tus resultados con gráficos de alta calidad y exporta reportes completos.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Slider Navigation -->
+        <div class="slider-nav" role="tablist" aria-label="Navegación de slides">
+            <button class="nav-dot active" id="slide-1-dot" data-slide="1" role="tab" aria-selected="true" aria-label="Slide 1: Cargar Datos" aria-controls="slide-1-panel" tabindex="0"></button>
+            <button class="nav-dot" id="slide-2-dot" data-slide="2" role="tab" aria-selected="false" aria-label="Slide 2: Preprocesamiento" aria-controls="slide-2-panel" tabindex="0"></button>
+            <button class="nav-dot" id="slide-3-dot" data-slide="3" role="tab" aria-selected="false" aria-label="Slide 3: Detección de Outliers" aria-controls="slide-3-panel" tabindex="0"></button>
+            <button class="nav-dot" id="slide-4-dot" data-slide="4" role="tab" aria-selected="false" aria-label="Slide 4: Análisis y Visualización" aria-controls="slide-4-panel" tabindex="0"></button>
+        </div>
+        
+        <!-- Slider Controls -->
+        <div class="slider-controls" aria-label="Controles del slider">
+            <button class="control-btn prev-btn" id="prevSlide" aria-label="Slide anterior" tabindex="0">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="control-btn next-btn" id="nextSlide" aria-label="Slide siguiente" tabindex="0">
+                <i class="fas fa-chevron-right" aria-hidden="true"></i>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container-fluid mt-4">
+        <!-- Skip to main content link for accessibility -->
+        <a href="#mainTabsContent" class="skip-link visually-hidden-focusable">Saltar al contenido principal</a>
+        
+        <!-- Tabs Navigation -->
+        <ul class="nav nav-tabs professional-tabs" id="mainTabs" role="tablist" aria-label="Navegación principal de la aplicación">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="load-data-tab" data-bs-toggle="tab" data-bs-target="#load-data" type="button" role="tab" aria-controls="load-data" aria-selected="true" tabindex="0">
+                    <i class="fas fa-upload me-2" aria-hidden="true"></i>Cargar Datos
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="preprocess-tab" data-bs-toggle="tab" data-bs-target="#preprocess" type="button" role="tab" aria-controls="preprocess" aria-selected="false" tabindex="0">
+                    <i class="fas fa-cogs me-2" aria-hidden="true"></i>Preprocesamiento
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="detect-outliers-tab" data-bs-toggle="tab" data-bs-target="#detect-outliers" type="button" role="tab" aria-controls="detect-outliers" aria-selected="false" tabindex="0">
+                    <i class="fas fa-search me-2" aria-hidden="true"></i>Detección de Outliers
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="analyze-viz-tab" data-bs-toggle="tab" data-bs-target="#analyze-viz" type="button" role="tab" aria-controls="analyze-viz" aria-selected="false" tabindex="0">
+                    <i class="fas fa-chart-bar me-2" aria-hidden="true"></i>Análisis y Visualización
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="results-tab" data-bs-toggle="tab" data-bs-target="#results" type="button" role="tab" aria-controls="results" aria-selected="false" tabindex="0">
+                    <i class="fas fa-file-alt me-2" aria-hidden="true"></i>Resultados
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="testing-tab" data-bs-toggle="tab" data-bs-target="#testing" type="button" role="tab" aria-controls="testing" aria-selected="false" tabindex="0">
+                    <i class="fas fa-vial me-2" aria-hidden="true"></i>Testing
+                </button>
+            </li>
+        </ul>
+
+        <!-- Tab Content -->
+        <div class="tab-content" id="mainTabsContent">
+            <!-- Load Data Tab -->
+            <div class="tab-pane fade show active" id="load-data" role="tabpanel" aria-labelledby="load-data-tab" tabindex="0">
+                <div id="load-data-content" aria-live="polite" aria-atomic="true"></div>
+            </div>
+
+            <!-- Preprocess Tab -->
+            <div class="tab-pane fade" id="preprocess" role="tabpanel" aria-labelledby="preprocess-tab" tabindex="0">
+                <div id="preprocess-content" aria-live="polite" aria-atomic="true"></div>
+            </div>
+
+            <!-- Detect Outliers Tab -->
+            <div class="tab-pane fade" id="detect-outliers" role="tabpanel" aria-labelledby="detect-outliers-tab" tabindex="0">
+                <div id="detect-outliers-content" aria-live="polite" aria-atomic="true"></div>
+            </div>
+
+            <!-- Analyze and Visualize Tab -->
+            <div class="tab-pane fade" id="analyze-viz" role="tabpanel" aria-labelledby="analyze-viz-tab" tabindex="0">
+                <div id="analyze-viz-content" aria-live="polite" aria-atomic="true"></div>
+            </div>
+
+            <!-- Results Tab -->
+            <div class="tab-pane fade" id="results" role="tabpanel" aria-labelledby="results-tab" tabindex="0">
+                <div id="results-content" aria-live="polite" aria-atomic="true"></div>
+            </div>
+
+            <!-- Testing Tab -->
+            <div class="tab-pane fade" id="testing" role="tabpanel" aria-labelledby="testing-tab" tabindex="0">
+                <div id="testing-content" aria-live="polite" aria-atomic="true"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Dataset Details Modal -->
+    <div class="modal fade" id="datasetDetailsModal" tabindex="-1" role="dialog" aria-labelledby="datasetDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-light-blue text-white">
+                    <h5 class="modal-title" id="datasetDetailsModalLabel">Detalles del Dataset</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar modal de detalles del dataset"></button>
+                </div>
+                <div class="modal-body" id="datasetDetailsContent" role="document">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Variables Modal -->
+    <div class="modal fade" id="editVariablesModal" tabindex="-1" role="dialog" aria-labelledby="editVariablesModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-light-blue text-white">
+                    <h5 class="modal-title" id="editVariablesModalLabel">Editar Tipos de Variables</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar modal de edición de variables"></button>
+                </div>
+                <div class="modal-body" id="editVariablesContent" role="document">
+                    <!-- Content will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-light-blue text-white" id="saveVariableTypes" aria-label="Guardar cambios en tipos de variables">Guardar Cambios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset Preview Modal -->
+    <div class="modal fade" id="datasetPreviewModal" tabindex="-1" role="dialog" aria-labelledby="datasetPreviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-light-blue text-white">
+                    <h5 class="modal-title" id="datasetPreviewModalLabel">Vista Previa del Dataset</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar modal de vista previa"></button>
+                </div>
+                <div class="modal-body" id="datasetPreviewContent" role="document">
+                    <!-- Content will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="/static/main.js"></script>
+</body>
+</html> 

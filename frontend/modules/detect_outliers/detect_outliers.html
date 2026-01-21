@@ -1,0 +1,1383 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fas fa-search me-2"></i>
+                        Detección de Outliers
+                    </h4>
+                    <p class="card-text">
+                        Módulo de detección de outliers. Aquí podrás identificar valores atípicos en tus datasets usando diferentes métodos estadísticos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset Selection -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-database me-2"></i>
+                        Seleccionar Dataset para Análisis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="datasetSelectionContainer">
+                        <!-- Los paneles de datasets se cargarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección 1: Exploración Visual -->
+    <div class="row mb-4" id="visualExplorationSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-line me-2 text-primary"></i>
+                        Exploración Visual
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Selector de Variable -->
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="variableSelect" class="form-label">
+                                    <i class="fas fa-chart-bar me-2"></i>
+                                    Seleccionar Variable para Análisis:
+                                </label>
+                                <select class="form-select" id="variableSelect">
+                                    <option value="">Selecciona una variable...</option>
+                                </select>
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Selecciona una variable numérica o categórica para explorar su distribución
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabs de Visualización -->
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="visualizationTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="general-tab" data-bs-toggle="tab" data-bs-target="#general" type="button" role="tab" aria-controls="general" aria-selected="true">
+                                        <i class="fas fa-chart-pie me-2"></i>
+                                        Visualización General
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="category-tab" data-bs-toggle="tab" data-bs-target="#category" type="button" role="tab" aria-controls="category" aria-selected="false">
+                                        <i class="fas fa-layer-group me-2"></i>
+                                        Distribución por Categoría
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="relationship-tab" data-bs-toggle="tab" data-bs-target="#relationship" type="button" role="tab" aria-controls="relationship" aria-selected="false">
+                                        <i class="fas fa-project-diagram me-2"></i>
+                                        Relación entre Variables
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="correlation-tab" data-bs-toggle="tab" data-bs-target="#correlation" type="button" role="tab" aria-controls="correlation" aria-selected="false">
+                                        <i class="fas fa-th me-2"></i>
+                                        Matriz de Correlación
+                                    </button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content" id="visualizationTabContent">
+                                <!-- Tab: Visualización General -->
+                                <div class="tab-pane fade show active" id="general" role="tabpanel" aria-labelledby="general-tab">
+                                    <div class="mt-3">
+                                        <!-- Para Variables Numéricas -->
+                                        <div id="numericVisualizations" style="display: none;">
+                                            <div class="row">
+                                                <!-- Histograma -->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-bar me-2 text-info"></i>
+                                                                Histograma
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="generalHistogramChart" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable numérica para visualizar el histograma</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Gráfico de Densidad -->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-area me-2 text-success"></i>
+                                                                Gráfico de Densidad
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="generalDensityChart" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-area fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable numérica para visualizar la densidad</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Boxplot -->
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-box me-2 text-warning"></i>
+                                                                Boxplot
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="generalBoxplotChart" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-box fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable numérica para visualizar el boxplot</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Para Variables Categóricas -->
+                                        <div id="categoricalVisualizations" style="display: none;">
+                                            <div class="row">
+                                                <!-- Gráfico de Barras -->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-bar me-2 text-primary"></i>
+                                                                Gráfico de Barras
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="generalBarChart" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para visualizar</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Gráfico de Pastel -->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-pie me-2 text-success"></i>
+                                                                Diagrama de Pastel
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="generalPieChart" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-pie fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para visualizar</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Tabla de Frecuencias -->
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="card h-100">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-table me-2 text-info"></i>
+                                                                Tabla de Frecuencias
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="generalFrequencyTable" class="table-responsive">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-table fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para ver la tabla de frecuencias</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Información Estadística -->
+                                        <div class="row mt-4">
+                                            <div class="col-12">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h6 class="mb-0">
+                                                            <i class="fas fa-calculator me-2 text-warning"></i>
+                                                            Estadística Descriptiva
+                                                        </h6>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div id="statisticalInfo">
+                                                            <div class="text-center text-muted py-3">
+                                                                <i class="fas fa-info-circle fa-2x mb-2"></i>
+                                                                <p>Selecciona una variable para ver la información estadística</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Mensaje inicial -->
+                                        <div id="initialMessage" class="text-center text-muted py-5">
+                                            <i class="fas fa-chart-pie fa-3x mb-3"></i>
+                                            <p>Selecciona una variable para ver la visualización general</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab: Distribución por Categoría -->
+                                <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab">
+                                    <div class="mt-3">
+                                        <!-- Selector de Variable Categórica -->
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="categoricalVariableSelect" class="form-label">
+                                                        <i class="fas fa-filter me-2"></i>
+                                                        Seleccionar Variable Categórica:
+                                                    </label>
+                                                    <select class="form-select" id="categoricalVariableSelect">
+                                                        <option value="">Selecciona una variable categórica...</option>
+                                                    </select>
+                                                    <div class="form-text">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-info-circle me-1"></i>
+                                                            Selecciona una variable categórica para analizar la distribución de la variable principal
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Contenido dinámico según el tipo de variable inicial -->
+                                        <div id="categoryAnalysisContent">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-layer-group fa-3x mb-3"></i>
+                                                <p>Selecciona una variable categórica para ver la distribución por categorías</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Para Variables Cuantitativas por Categoría -->
+                                        <div id="quantitativeByCategory" style="display: none;">
+                                            <div class="row">
+                                                <!-- Histogramas por Categoría -->
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-bar me-2 text-info"></i>
+                                                                Histogramas por Categoría
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="categoryHistograms" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para ver los histogramas</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Gráficos de Densidad por Categoría -->
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-area me-2 text-success"></i>
+                                                                Gráficos de Densidad por Categoría
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="categoryDensityCharts" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-area fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para ver los gráficos de densidad</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Boxplots por Categoría -->
+                                                <div class="col-md-12 mb-4">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-box me-2 text-warning"></i>
+                                                                Boxplots por Categoría
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="categoryBoxplots" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-box fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para ver los boxplots</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Para Variables Categóricas por Categoría -->
+                                        <div id="categoricalByCategory" style="display: none;">
+                                            <div class="row">
+                                                <!-- Gráfico de Barras Apiladas -->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-bar me-2 text-primary"></i>
+                                                                Gráfico de Barras Apiladas
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="categoryStackedBarChart" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-bar fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para ver el gráfico de barras apiladas</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Tabla de Frecuencias Cruzadas -->
+                                                <div class="col-md-6 mb-4">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-table me-2 text-info"></i>
+                                                                Tabla de Frecuencias Cruzadas
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="categoryCrossTable" class="table-responsive">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-table fa-3x mb-3"></i>
+                                                                    <p>Selecciona una variable categórica para ver la tabla de frecuencias</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab: Relación entre Variables -->
+                                <div class="tab-pane fade" id="relationship" role="tabpanel" aria-labelledby="relationship-tab">
+                                    <div class="mt-3">
+                                        <!-- Selectores de Variables Cuantitativas -->
+                                        <div class="row mb-4">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="quantitativeVariable1Select" class="form-label">
+                                                        <i class="fas fa-chart-line me-2"></i>
+                                                        Variable Cuantitativa 1:
+                                                    </label>
+                                                    <select class="form-select" id="quantitativeVariable1Select">
+                                                        <option value="">Selecciona una variable cuantitativa...</option>
+                                                    </select>
+                                                    <div class="form-text">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-info-circle me-1"></i>
+                                                            Selecciona la primera variable para el análisis de correlación
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="quantitativeVariable2Select" class="form-label">
+                                                        <i class="fas fa-chart-line me-2"></i>
+                                                        Variable Cuantitativa 2:
+                                                    </label>
+                                                    <select class="form-select" id="quantitativeVariable2Select">
+                                                        <option value="">Selecciona una variable cuantitativa...</option>
+                                                    </select>
+                                                    <div class="form-text">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-info-circle me-1"></i>
+                                                            Selecciona la segunda variable para el análisis de correlación
+                                                        </small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Contenido inicial -->
+                                        <div id="relationshipInitialContent">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-project-diagram fa-3x mb-3"></i>
+                                                <p>Selecciona dos variables cuantitativas para analizar su relación</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Análisis de Relación -->
+                                        <div id="relationshipAnalysis" style="display: none;">
+                                            <!-- Diagrama de Dispersión -->
+                                            <div class="row mb-4">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-chart-scatter me-2 text-primary"></i>
+                                                                Diagrama de Dispersión
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="scatterPlot" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-chart-scatter fa-3x mb-3"></i>
+                                                                    <p>Selecciona dos variables para ver el diagrama de dispersión</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Tabla de Correlación -->
+                                            <div class="row">
+                                                <div class="col-md-8">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-table me-2 text-info"></i>
+                                                                Análisis de Correlación
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="correlationTable" class="table-responsive">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-table fa-3x mb-3"></i>
+                                                                    <p>Selecciona dos variables para ver el análisis de correlación</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Leyenda de Rangos -->
+                                                <div class="col-md-4">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-info-circle me-2 text-success"></i>
+                                                                Rangos de Evaluación
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="correlationLegend">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-info-circle fa-3x mb-3"></i>
+                                                                    <p>Leyenda de rangos de correlación</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab: Matriz de Correlación -->
+                                <div class="tab-pane fade" id="correlation" role="tabpanel" aria-labelledby="correlation-tab">
+                                    <div class="mt-3">
+                                                            <!-- Configuración Avanzada del Pair Plot -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-cogs me-2"></i>
+                                        Configuración del Pair Plot
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Variables -->
+                                    <div class="row mb-3">
+                                        <div class="col-12">
+                                            <label class="form-label">
+                                                <i class="fas fa-list-check me-2"></i>
+                                                Variables para el Pair Plot:
+                                            </label>
+                                            <div id="correlationVariablesCheckboxes" class="row">
+                                                <!-- Los checkboxes se cargarán dinámicamente -->
+                                                <div class="col-12 text-center text-muted py-3">
+                                                    <i class="fas fa-spinner fa-spin me-2"></i>
+                                                    Cargando variables...
+                                                </div>
+                                            </div>
+                                            <div class="mt-2">
+                                                <button type="button" class="btn btn-outline-secondary btn-sm" id="selectAllQuantitative">
+                                                    <i class="fas fa-check-double me-2"></i>
+                                                    Seleccionar Todas
+                                                </button>
+                                                <button type="button" class="btn btn-outline-secondary btn-sm ms-2" id="clearSelection">
+                                                    <i class="fas fa-times me-2"></i>
+                                                    Limpiar Selección
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Configuración básica -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="hueVariableSelect" class="form-label">
+                                                <i class="fas fa-palette me-2"></i>
+                                                Variable Hue (Color):
+                                            </label>
+                                            <select class="form-select" id="hueVariableSelect">
+                                                <option value="">Sin variable hue</option>
+                                            </select>
+                                            <div class="form-text">
+                                                <small class="text-muted">
+                                                    Variable categórica para colorear los puntos
+                                                </small>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="paletteSelect" class="form-label">
+                                                <i class="fas fa-palette me-2"></i>
+                                                Paleta de Colores:
+                                            </label>
+                                            <select class="form-select" id="paletteSelect">
+                                                <option value="husl">Husl (Default)</option>
+                                                <option value="Set1">Set1</option>
+                                                <option value="Set2">Set2</option>
+                                                <option value="Set3">Set3</option>
+                                                <option value="Paired">Paired</option>
+                                                <option value="Accent">Accent</option>
+                                                <option value="Dark2">Dark2</option>
+                                                <option value="tab10">Tab10</option>
+                                                <option value="viridis">Viridis</option>
+                                                <option value="plasma">Plasma</option>
+                                                <option value="inferno">Inferno</option>
+                                                <option value="magma">Magma</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Tipo de gráfico -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label for="kindSelect" class="form-label">
+                                                <i class="fas fa-chart-scatter me-2"></i>
+                                                Tipo de Gráfico (Kind):
+                                            </label>
+                                            <select class="form-select" id="kindSelect">
+                                                <option value="scatter">Scatter (Dispersión)</option>
+                                                <option value="kde">KDE (Densidad)</option>
+                                                <option value="hist">Histograma</option>
+                                                <option value="reg">Regresión</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="diagKindSelect" class="form-label">
+                                                <i class="fas fa-chart-bar me-2"></i>
+                                                Tipo Diagonal (Diag Kind):
+                                            </label>
+                                            <select class="form-select" id="diagKindSelect">
+                                                <option value="auto">Auto</option>
+                                                <option value="hist">Histograma</option>
+                                                <option value="kde">KDE</option>
+                                                <option value="">Ninguno</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Configuración de tamaño -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label for="heightInput" class="form-label">
+                                                <i class="fas fa-arrows-alt-v me-2"></i>
+                                                Altura (Height):
+                                            </label>
+                                            <input type="number" class="form-control" id="heightInput" value="2.5" step="0.1" min="1" max="10">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="aspectInput" class="form-label">
+                                                <i class="fas fa-arrows-alt-h me-2"></i>
+                                                Aspecto (Aspect):
+                                            </label>
+                                            <input type="number" class="form-control" id="aspectInput" value="1" step="0.1" min="0.5" max="3">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label for="titleInput" class="form-label">
+                                                <i class="fas fa-heading me-2"></i>
+                                                Título:
+                                            </label>
+                                            <input type="text" class="form-control" id="titleInput" value="Pair Plot - Matriz de Dispersión">
+                                        </div>
+                                    </div>
+
+                                    <!-- Opciones adicionales -->
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="cornerCheck">
+                                                <label class="form-check-label" for="cornerCheck">
+                                                    <i class="fas fa-triangle me-2"></i>
+                                                    Corner Plot (Solo triángulo inferior)
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="dropnaCheck" checked>
+                                                <label class="form-check-label" for="dropnaCheck">
+                                                    <i class="fas fa-trash me-2"></i>
+                                                    Eliminar valores faltantes
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="markersSelect" class="form-label">
+                                                <i class="fas fa-shapes me-2"></i>
+                                                Marcadores:
+                                            </label>
+                                            <select class="form-select" id="markersSelect">
+                                                <option value="">Automático</option>
+                                                <option value="o">Círculo (o)</option>
+                                                <option value="s">Cuadrado (s)</option>
+                                                <option value="D">Diamante (D)</option>
+                                                <option value="^">Triángulo (^)</option>
+                                                <option value="v">Triángulo invertido (v)</option>
+                                                <option value="<">Triángulo izquierdo (<)</option>
+                                                <option value=">">Triángulo derecho (>)</option>
+                                                <option value="p">Pentágono (p)</option>
+                                                <option value="*">Estrella (*)</option>
+                                                <option value="h">Hexágono (h)</option>
+                                                <option value="H">Hexágono grande (H)</option>
+                                                <option value="+">Cruz (+)</option>
+                                                <option value="x">X (x)</option>
+                                                <option value="X">X grande (X)</option>
+                                                <option value="d">Diamante pequeño (d)</option>
+                                                <option value="|">Línea vertical (|)</option>
+                                                <option value="_">Línea horizontal (_)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Botón de generación -->
+                                    <div class="row">
+                                        <div class="col-12">
+                                                                                <button type="button" class="btn btn-primary" id="generatePairPlot">
+                                        <i class="fas fa-chart-line me-2"></i>
+                                        Generar Pair Plot
+                                    </button>
+                                    <button type="button" class="btn btn-outline-info ms-2" id="resetPairPlotConfig">
+                                        <i class="fas fa-undo me-2"></i>
+                                        Restablecer Configuración
+                                    </button>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                                        <!-- Contenido inicial -->
+                                        <div id="correlationInitialContent">
+                                            <div class="text-center text-muted py-5">
+                                                <i class="fas fa-th fa-3x mb-3"></i>
+                                                <p>Selecciona múltiples variables cuantitativas para generar la matriz de correlación</p>
+                                            </div>
+                                        </div>
+
+                                        <!-- Análisis de Matriz de Correlación -->
+                                        <div id="correlationMatrixAnalysis" style="display: none;">
+                                            <!-- Pair Plot -->
+                                            <div class="row mb-4">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-th me-2 text-primary"></i>
+                                                                Pair Plot - Matriz de Dispersión
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="pairPlot" class="chart-container">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-th fa-3x mb-3"></i>
+                                                                    <p>Generando pair plot...</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Matriz de Correlación -->
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <h6 class="mb-0">
+                                                                <i class="fas fa-table me-2 text-info"></i>
+                                                                Matriz de Correlación
+                                                            </h6>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div id="correlationMatrixTable" class="table-responsive">
+                                                                <div class="text-center text-muted py-5">
+                                                                    <i class="fas fa-table fa-3x mb-3"></i>
+                                                                    <p>Generando matriz de correlación...</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección 2: Configuración del Análisis -->
+    <div class="row mb-4" id="analysisConfigurationSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-cogs me-2 text-success"></i>
+                        Configuración del Análisis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Fila superior: Estrategia de Combinación e Identificador del Sujeto -->
+                    <div class="row mb-4">
+                        <!-- Estrategia de Combinación -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="combineStrategy" class="form-label">
+                                    <i class="fas fa-merge me-2 text-primary"></i>
+                                    <strong>Estrategia de Combinación</strong>
+                                </label>
+                                <select id="combineStrategy" class="form-select">
+                                    <option value="adaptive">Adaptativa (Recomendada para Investigación Clínica)</option>
+                                    <option value="voting">Votación</option>
+                                    <option value="union">Unión</option>
+                                    <option value="intersection">Intersección</option>
+                                </select>
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Selecciona cómo combinar los resultados de diferentes métodos de detección
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Identificador del Sujeto -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="subjectIdSelect" class="form-label">
+                                    
+                                    <strong>Identificador del Sujeto</strong>
+                                </label>
+                                <select class="form-select" id="subjectIdSelect">
+                                    <option value="">Selecciona la variable ID...</option>
+                                </select>
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Variable que representa los identificadores únicos de las observaciones
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Panel de Descripción de Estrategias -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="alert alert-primary" role="alert">
+                                <h6 class="alert-heading mb-2">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Descripción de Estrategias
+                                </h6>
+                                <div id="strategyDescription" class="small">
+                                    <div><strong>Adaptativa (Recomendada):</strong> Se adapta automáticamente según la normalidad de los datos. Si los datos son normales, prioriza métodos paramétricos (Z-Score, Mahalanobis). Si no son normales, prioriza métodos no paramétricos (IQR, MAD, LOF, Isolation Forest). Siempre incluye outliers detectados por pruebas de hipótesis (alta confianza estadística).</div>
+                                    <div class="mt-1"><strong>Votación:</strong> Un outlier se considera final si es detectado por al menos <span id="minUniDisplay">2</span> métodos univariados y al menos <span id="minMultiDisplay">1</span> método multivariado. Además, se incluyen todos los outliers detectados por las pruebas de hipótesis (Grubbs, Dixon, Rosner).</div>
+                                    <div class="mt-1"><strong>Unión:</strong> Un outlier se considera final si es detectado por cualquier método univariado, multivariado o prueba de hipótesis.</div>
+                                    <div class="mt-1"><strong>Intersección:</strong> Un outlier se considera final si es detectado por TODOS los métodos univariados Y TODOS los métodos multivariados Y TODAS las pruebas de hipótesis.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fila inferior: Mínimo Métodos Univariados y Multivariados (Solo para estrategia Votación) -->
+                    <div class="row mb-4" id="votingStrategyParams" style="display: none;">
+                        <!-- Mínimo Métodos Univariados -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="minUnivariate" class="form-label">
+                                    
+                                    <strong>Mínimo Métodos Univariados</strong>
+                                    <span class="badge bg-info ms-2">Solo para Votación</span>
+                                </label>
+                                <input type="number" id="minUnivariate" value="2" min="1" max="3" class="form-control">
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Mínimo de métodos univariados que deben detectar el outlier (solo aplica para estrategia "Votación")
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mínimo Métodos Multivariados -->
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="minMultivariate" class="form-label">
+                                    
+                                    <strong>Mínimo Métodos Multivariados</strong>
+                                    <span class="badge bg-info ms-2">Solo para Votación</span>
+                                </label>
+                                <input type="number" id="minMultivariate" value="1" min="1" max="3" class="form-control">
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Mínimo de métodos multivariados que deben detectar el outlier (solo aplica para estrategia "Votación")
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón de Ejecución -->
+                    <div class="row">
+                        <div class="col-12 text-center">
+                            <button id="detectOutliersBtn" class="btn btn-success btn-lg px-5">
+                                <i class="fas fa-play me-2"></i>Ejecutar Detección de Outliers
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección 3: Resultados de Detección de Outliers -->
+    <div class="row mb-4" id="outlierResultsSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-success text-dark">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Resultados de Detección de Outliers
+                    </h5>
+                </div>
+                <div class="card-body">
+                    
+                    <!-- Cards de Resumen -->
+                    <div class="row mb-4">
+                        <div class="col-md-3 mb-3">
+                            <div class="card text-center border-primary">
+                                <div class="card-body">
+                                    <div class="card-icon mb-2">
+                                        <i class="fas fa-database fa-2x text-primary"></i>
+                                    </div>
+                                    <h5 class="card-title text-primary" id="totalRecords">0</h5>
+                                    <p class="card-text">Total de Registros</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card text-center border-warning">
+                                <div class="card-body">
+                                    <div class="card-icon mb-2">
+                                        <i class="fas fa-exclamation-triangle fa-2x text-warning"></i>
+                                    </div>
+                                    <h5 class="card-title text-warning" id="outliersDetected">0</h5>
+                                    <p class="card-text">Outliers Detectados</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card text-center border-danger">
+                                <div class="card-body">
+                                    <div class="card-icon mb-2">
+                                        <i class="fas fa-percentage fa-2x text-danger"></i>
+                                    </div>
+                                    <h5 class="card-title text-danger" id="outlierPercentage">0%</h5>
+                                    <p class="card-text">Porcentaje de Outliers</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="card text-center border-info">
+                                <div class="card-body">
+                                    <div class="card-icon mb-2">
+                                        <i class="fas fa-cogs fa-2x text-info"></i>
+                                    </div>
+                                    <h5 class="card-title text-info" id="combinationStrategy">Votación</h5>
+                                    <p class="card-text">Estrategia de Combinación</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sección de Evaluación de Normalidad y Estrategia Aplicada -->
+                    <div class="row mb-4" id="normalityAssessmentSection" style="display: none;">
+                        <div class="col-12">
+                            <div class="card border-info">
+                                <div class="card-header bg-info text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-clipboard-check me-2"></i>
+                                        Evaluación de Normalidad y Estrategia Aplicada
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div id="normalityAssessmentContent">
+                                        <!-- Contenido se cargará dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métodos de Detección -->
+                    <div class="row">
+                        <!-- Métodos Univariados -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-chart-line me-2"></i>
+                                        Métodos Univariados
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="accordion" id="univariateMethodsAccordion">
+                                        
+                                        <!-- Método IQR -->
+                                        <div class="accordion-item rounded mb-2">
+                                            <h2 class="accordion-header" id="iqrHeader">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#iqrResults" aria-expanded="false" aria-controls="iqrResults">
+                                                    
+                                                    Método de Rango Intercuartílico (IQR)
+                                                    <span class="badge bg-primary ms-2" id="iqrCount">0</span>
+                                                </button>
+                                            </h2>
+                                            <div id="iqrResults" class="accordion-collapse collapse" aria-labelledby="iqrHeader" data-bs-parent="#univariateMethodsAccordion">
+                                                <div class="accordion-body">
+                                                    <div id="iqrOutliers">
+                                                        <!-- Los badges de outliers se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Método Z-Score -->
+                                        <div class="accordion-item rounded mb-2">
+                                            <h2 class="accordion-header" id="zscoreHeader">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#zscoreResults" aria-expanded="false" aria-controls="zscoreResults">
+                                                    
+                                                    Método Z-Score
+                                                    <span class="badge bg-primary ms-2" id="zscoreCount">0</span>
+                                                </button>
+                                            </h2>
+                                            <div id="zscoreResults" class="accordion-collapse collapse" aria-labelledby="zscoreHeader" data-bs-parent="#univariateMethodsAccordion">
+                                                <div class="accordion-body">
+                                                    <div id="zscoreOutliers">
+                                                        <!-- Los badges de outliers se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Método MAD -->
+                                        <div class="accordion-item rounded mb-2">
+                                            <h2 class="accordion-header" id="madHeader">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#madResults" aria-expanded="false" aria-controls="madResults">
+                                                    
+                                                    Método de la Mediana Absoluta de la Desviación (MAD)
+                                                    <span class="badge bg-primary ms-2" id="madCount">0</span>
+                                                </button>
+                                            </h2>
+                                            <div id="madResults" class="accordion-collapse collapse" aria-labelledby="madHeader" data-bs-parent="#univariateMethodsAccordion">
+                                                <div class="accordion-body">
+                                                    <div id="madOutliers">
+                                                        <!-- Los badges de outliers se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Métodos Multivariados -->
+                        <div class="col-md-6">
+                            <div class="card">
+                                <div class="card-header bg-success text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-project-diagram me-2"></i>
+                                        Métodos Multivariados
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="accordion" id="multivariateMethodsAccordion">
+                                        
+                                        <!-- Método Mahalanobis -->
+                                        <div class="accordion-item rounded mb-2">
+                                            <h2 class="accordion-header" id="mahalanobisHeader">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mahalanobisResults" aria-expanded="false" aria-controls="mahalanobisResults">
+                                                    
+                                                    Distancia de Mahalanobis
+                                                    <span class="badge bg-success ms-2" id="mahalanobisCount">0</span>
+                                                </button>
+                                            </h2>
+                                            <div id="mahalanobisResults" class="accordion-collapse collapse" aria-labelledby="mahalanobisHeader" data-bs-parent="#multivariateMethodsAccordion">
+                                                <div class="accordion-body">
+                                                    <div id="mahalanobisOutliers">
+                                                        <!-- Los badges de outliers se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Método LOF -->
+                                        <div class="accordion-item rounded mb-2">
+                                            <h2 class="accordion-header" id="lofHeader">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#lofResults" aria-expanded="false" aria-controls="lofResults">
+                                                    
+                                                    Local Outlier Factor (LOF)
+                                                    <span class="badge bg-success ms-2" id="lofCount">0</span>
+                                                </button>
+                                            </h2>
+                                            <div id="lofResults" class="accordion-collapse collapse" aria-labelledby="lofHeader" data-bs-parent="#multivariateMethodsAccordion">
+                                                <div class="accordion-body">
+                                                    <div id="lofOutliers">
+                                                        <!-- Los badges de outliers se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Método Isolation Forest -->
+                                        <div class="accordion-item rounded mb-2">
+                                            <h2 class="accordion-header" id="isolationForestHeader">
+                                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#isolationForestResults" aria-expanded="false" aria-controls="isolationForestResults">
+                                                    
+                                                    Isolation Forest
+                                                    <span class="badge bg-success ms-2" id="isolationForestCount">0</span>
+                                                </button>
+                                            </h2>
+                                            <div id="isolationForestResults" class="accordion-collapse collapse" aria-labelledby="isolationForestHeader" data-bs-parent="#multivariateMethodsAccordion">
+                                                <div class="accordion-body">
+                                                    <div id="isolationForestOutliers">
+                                                        <!-- Los badges de outliers se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pruebas de Hipótesis - Confirmación -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-warning text-dark">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-flask me-2"></i>
+                                        Pruebas de Hipótesis - Confirmación
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        <strong>Información:</strong> Esta sección permite confirmar los resultados obtenidos en los métodos univariados y multivariados mediante pruebas estadísticas específicas.
+                                    </div>
+                                    
+                                    <!-- Resultados de Pruebas de Hipótesis -->
+                                    <div id="hypothesisResultsContainer">
+                                        
+                                        <!-- Test de Grubbs -->
+                                        <div class="accordion" id="hypothesisTestsAccordion">
+                                            <div class="accordion-item rounded mb-2">
+                                                <h2 class="accordion-header" id="grubbsHeader">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#grubbsResults" aria-expanded="false" aria-controls="grubbsResults">
+                                                        <i class="fas fa-chart-line me-2"></i>
+                                                        Prueba de Grubbs
+                                                        <span id="grubbsCount" class="badge bg-secondary ms-2">0</span>
+                                                    </button>
+                                                </h2>
+                                                <div id="grubbsResults" class="accordion-collapse collapse" aria-labelledby="grubbsHeader" data-bs-parent="#hypothesisTestsAccordion">
+                                                    <div class="accordion-body">
+                                                        <div class="alert alert-secondary">
+                                                            <h6 class="alert-heading">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Descripción del Test de Grubbs:
+                                                            </h6>
+                                                            <p class="mb-0">
+                                                                Es un test para detectar un único outlier, que puede ser el valor más alto o el más bajo de los datos. 
+                                                                La prueba calcula un estadístico que compara la desviación del valor más extremo con la desviación estándar de la muestra. 
+                                                                Un p-valor significativo indica que el valor extremo es un outlier.
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Resultados de Grubbs por variable -->
+                                                        <div id="grubbsResultsContainer">
+                                                            <!-- Los resultados se cargarán dinámicamente -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Test de Dixon -->
+                                            <div class="accordion-item rounded mb-2">
+                                                <h2 class="accordion-header" id="dixonHeader">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#dixonResults" aria-expanded="false" aria-controls="dixonResults">
+                                                        <i class="fas fa-chart-line me-2"></i>
+                                                        Prueba de Dixon (Q-Test)
+                                                        <span id="dixonCount" class="badge bg-secondary ms-2">0</span>
+                                                    </button>
+                                                </h2>
+                                                <div id="dixonResults" class="accordion-collapse collapse" aria-labelledby="dixonHeader" data-bs-parent="#hypothesisTestsAccordion">
+                                                    <div class="accordion-body">
+                                                        <div class="alert alert-secondary">
+                                                            <h6 class="alert-heading">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Descripción del Test de Dixon (Q-Test):
+                                                            </h6>
+                                                            <p class="mb-0">
+                                                                Es un test para detectar un único outlier, más adecuado para muestras pequeñas (3-30 observaciones). 
+                                                                Compara la diferencia entre el valor extremo y su vecino más cercano con el rango total de la muestra. 
+                                                                Un valor Q alto y significativo sugiere que el valor es un outlier.
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Resultados de Dixon por variable -->
+                                                        <div id="dixonResultsContainer">
+                                                            <!-- Los resultados se cargarán dinámicamente -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Test de Rosner -->
+                                            <div class="accordion-item rounded mb-2">
+                                                <h2 class="accordion-header" id="rosnerHeader">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#rosnerResults" aria-expanded="false" aria-controls="rosnerResults">
+                                                        <i class="fas fa-chart-line me-2"></i>
+                                                        Prueba de Rosner (Generalized ESD Test)
+                                                        <span id="rosnerCount" class="badge bg-secondary ms-2">0</span>
+                                                    </button>
+                                                </h2>
+                                                <div id="rosnerResults" class="accordion-collapse collapse" aria-labelledby="rosnerHeader" data-bs-parent="#hypothesisTestsAccordion">
+                                                    <div class="accordion-body">
+                                                        <div class="alert alert-secondary">
+                                                            <h6 class="alert-heading">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Descripción del Test de Rosner (Generalized ESD Test):
+                                                            </h6>
+                                                            <p class="mb-0">
+                                                                Es un test más robusto y avanzado para detectar múltiples outliers de manera simultánea. 
+                                                                La prueba no requiere que sepas de antemano cuántos outliers hay. Te permite probar la hipótesis 
+                                                                de que hay hasta k outliers en tu conjunto de datos, donde k es un número que se define automáticamente 
+                                                                (máximo 10% de la muestra). La prueba de Rosner es más potente porque puede detectar múltiples outliers simultáneamente.
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Resultados de Rosner por variable -->
+                                                        <div id="rosnerResultsContainer">
+                                                            <!-- Los resultados se cargarán dinámicamente -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Outliers Finales -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-danger text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-exclamation-triangle me-2"></i>
+                                        Outliers Finales (Combinación de Métodos)
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle me-2"></i>
+                                        <strong>Información:</strong> Estos son los outliers identificados después de aplicar la estrategia de combinación seleccionada.
+                                    </div>
+                                    <div id="finalOutliers">
+                                        <!-- Los badges de outliers finales se cargarán dinámicamente -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visualizations for Article -->
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header bg-primary text-white">
+                                    <h6 class="mb-0">
+                                        <i class="fas fa-chart-area me-2"></i>
+                                        Outlier Detection Visualization for Article
+                                    </h6>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Binary Matrix Heatmap -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-3">
+                                            <i class="fas fa-th me-2"></i>
+                                            Figure 5A: Binary Detection Matrix
+                                        </h6>
+                                        <p class="text-muted small mb-3">
+                                            Heatmap showing which samples were detected as outliers by each method. 
+                                            White/empty = not detected, Colored = detected by that method.
+                                        </p>
+                                        <div id="binaryMatrixHeatmap" style="width: 100%; min-height: 400px;"></div>
+                                    </div>
+
+                                    <!-- Sankey Diagram -->
+                                    <div class="mb-4">
+                                        <h6 class="mb-3">
+                                            <i class="fas fa-project-diagram me-2"></i>
+                                            Figure 5B: Consensus Flow Diagram (Sankey)
+                                        </h6>
+                                        <p class="text-muted small mb-3">
+                                            Flow diagram showing how each detection method connects to samples, 
+                                            and how samples flow to final consensus categories (High Consensus Outlier vs. No Outlier).
+                                        </p>
+                                        <div id="sankeyDiagram" style="width: 100%; min-height: 500px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Botón para Generar Texto del Artículo -->
+                    <div class="row mt-4 mb-4">
+                        <div class="col-12">
+                            <div class="card border-success">
+                                <div class="card-body text-center">
+                                    <h5 class="card-title text-success mb-3">
+                                        <i class="fas fa-file-alt me-2"></i>
+                                        Texto para Artículo Científico
+                                    </h5>
+                                    <p class="card-text text-muted mb-4">
+                                        Genera el texto completo y detallado para la sección de "Materiales y Métodos" o "Análisis Estadísticos" de tu artículo científico.
+                                    </p>
+                                    <button type="button" class="btn btn-success btn-lg" id="generateArticleTextBtn" onclick="detectOutliersModule.generateArticleText()">
+                                        <i class="fas fa-file-export me-2"></i>
+                                        Generar Texto para Artículo
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Texto del Artículo -->
+    <div class="modal fade" id="articleTextModal" tabindex="-1" role="dialog" aria-labelledby="articleTextModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="articleTextModalLabel">
+                        <i class="fas fa-file-alt me-2"></i>
+                        Texto para Sección de Materiales y Métodos
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <label class="form-label mb-0"><strong>Texto generado:</strong></label>
+                            <button type="button" class="btn btn-sm btn-outline-primary" onclick="detectOutliersModule.copyArticleText()">
+                                <i class="fas fa-copy me-1"></i> Copiar al Portapapeles
+                            </button>
+                        </div>
+                        <textarea id="articleTextContent" class="form-control" rows="25" readonly style="font-family: 'Times New Roman', serif; font-size: 12pt; line-height: 1.5;"></textarea>
+                    </div>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <strong>Nota:</strong> Este texto puede ser copiado y pegado directamente en tu artículo científico. Ajusta según las normas de estilo de la revista donde planeas publicar.
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn btn-success" onclick="detectOutliersModule.copyArticleText()">
+                        <i class="fas fa-copy me-1"></i> Copiar Texto
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div> 

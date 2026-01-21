@@ -1,0 +1,33 @@
+# Dependencias de Python
+fastapi>=0.104.1
+uvicorn[standard]>=0.24.0
+pandas>=2.2.0
+numpy>=1.26.0
+openpyxl>=3.1.2
+python-multipart>=0.0.6
+aiofiles>=23.2.1
+scikit-learn>=1.4.0
+plotly>=5.17.0 
+seaborn>=0.13.2
+scipy>=1.12.0
+
+# Dependencias para Testing
+pytest>=9.0.2
+pytest-cov>=7.0.0
+pytest-asyncio>=1.3.0
+pytest-html>=4.1.1
+pytest-json-report>=1.5.0
+requests>=2.31.0
+locust>=2.17.0
+
+# Dependencias para validación de archivos
+chardet>=5.2.0
+werkzeug>=3.0.0
+
+# Dependencias para análisis avanzado
+networkx>=3.0
+lifelines>=0.27.0
+statsmodels>=0.14.0
+
+# Dependencias para monitoreo de rendimiento
+psutil>=5.9.0

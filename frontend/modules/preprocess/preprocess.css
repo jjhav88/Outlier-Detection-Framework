@@ -1,0 +1,530 @@
+/* Specific CSS styles for preprocess module */
+
+/* Dashboard Cards */
+.dashboard-card {
+    transition: all 0.3s ease;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.dashboard-card .card-header {
+    border-bottom: none;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px 12px 0 0;
+    padding: 1rem;
+}
+
+.dashboard-card .card-body {
+    padding: 1.5rem;
+}
+
+/* Stat Cards */
+.stat-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.stat-card .stat-icon {
+    font-size: 2.5rem;
+    opacity: 0.8;
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0.5rem 0;
+}
+
+.stat-card .stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+
+
+/* Warning Stat Card */
+.stat-card.warning {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+/* Success Stat Card */
+.stat-card.success {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+/* Info Stat Card */
+.stat-card.info {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+/* Ensure consistent height for Final State cards only */
+#finalStateCards .col-md-3 {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+#finalStateCards .stat-card {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+#finalStateCards .stat-card .card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+}
+/* Preprocessing Tools */
+.preprocessing-tool-card {
+    border: 1px solid #e3f2fd;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.preprocessing-tool-card:hover {
+    border-color: #bbdefb;
+    box-shadow: 0 4px 15px rgba(227, 242, 253, 0.3);
+}
+
+.preprocessing-tool-card .card-header {
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    color: #1976d2;
+    border-bottom: 1px solid #90caf9;
+    border-radius: 12px 12px 0 0;
+}
+
+/* Data Types Conversion Panel */
+#dataTypesCard.inactive {
+    border-color: #dee2e6;
+    background-color: #f8f9fa;
+}
+
+#dataTypesCard.inactive .card-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #6c757d;
+}
+
+#dataTypesCard.inactive .card-body {
+    opacity: 0.5;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+#dataTypesCard.active .card-body {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 0.3s ease;
+}
+
+/* Switch styling */
+.form-check-input:checked {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.form-check-input:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+/* Progress Indicators */
+.progress-indicator {
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #e9ecef;
+    margin-right: 0.5rem;
+}
+
+.progress-indicator.completed {
+    background: #28a745;
+}
+
+.progress-indicator.pending {
+    background: #ffc107;
+}
+
+.progress-indicator.error {
+    background: #dc3545;
+}
+
+/* Loading States */
+.btn-loading {
+    position: relative;
+    pointer-events: none;
+}
+
+.btn-loading::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    margin: auto;
+    border: 2px solid transparent;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Dataset Selection */
+.dataset-select-container {
+    position: relative;
+}
+
+.dataset-select-container .form-select {
+    border-radius: 8px;
+    border: 2px solid #e3f2fd;
+    transition: all 0.3s ease;
+}
+
+.dataset-select-container .form-select:focus {
+    border-color: #1976d2;
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+/* Dataset Selection Panels */
+.dataset-selection-panel {
+    border: 2px solid #e3f2fd;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background: white;
+    position: relative;
+    overflow: hidden;
+    height: 100%; /* Asegurar altura consistente */
+    display: flex;
+    flex-direction: column;
+}
+
+.dataset-selection-panel:hover {
+    border-color: #bbdefb;
+    box-shadow: 0 4px 15px rgba(227, 242, 253, 0.3);
+    transform: translateY(-2px);
+}
+
+.dataset-selection-panel.selected {
+    border-color: #1976d2;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    box-shadow: 0 6px 20px rgba(25, 118, 210, 0.2);
+}
+
+/* Processed Dataset Panels */
+.dataset-selection-panel.processed-dataset {
+    border-color: #28a745;
+    background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+}
+
+.dataset-selection-panel.processed-dataset:hover {
+    border-color: #20c997;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+.dataset-selection-panel.processed-dataset.selected {
+    border-color: #28a745;
+    background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+    box-shadow: 0 6px 20px rgba(40, 167, 69, 0.2);
+}
+
+.dataset-selection-panel.processed-dataset .dataset-name {
+    color: #155724;
+}
+
+.dataset-selection-panel.processed-dataset .select-button {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+}
+
+.dataset-selection-panel.processed-dataset .select-button:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.dataset-selection-panel.selected::before {
+    content: '✓';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #1976d2;
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.dataset-selection-panel .card-body {
+    padding: 1.5rem;
+    flex: 1; /* Ocupar todo el espacio disponible */
+    display: flex;
+    flex-direction: column;
+}
+
+.dataset-selection-panel .dataset-info {
+    margin-bottom: 1rem;
+    flex: 1; /* Ocupar el espacio disponible */
+}
+
+.dataset-selection-panel .dataset-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #1976d2;
+    margin-bottom: 0.5rem;
+}
+
+.dataset-selection-panel .dataset-stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.dataset-selection-panel .stat-item {
+    text-align: center;
+    flex: 1;
+}
+
+.dataset-selection-panel .stat-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.dataset-selection-panel .stat-label {
+    font-size: 0.8rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.dataset-selection-panel .select-button {
+    width: 100%;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.dataset-selection-panel.selected .select-button {
+    background-color: #1976d2;
+    border-color: #1976d2;
+    color: white;
+}
+
+.dataset-selection-panel.selected .select-button:hover {
+    background-color: #1565c0;
+    border-color: #1565c0;
+}
+
+/* Empty state */
+.no-datasets-message {
+    text-align: center;
+    padding: 3rem;
+    color: #666;
+}
+
+.no-datasets-message i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+
+.no-datasets-message h5 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.no-datasets-message p {
+    margin-bottom: 1.5rem;
+}
+
+/* Selected dataset indicator */
+.selected-dataset-indicator {
+    background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.3);
+}
+
+.selected-dataset-indicator i {
+    font-size: 0.8rem;
+}
+
+/* Action Buttons */
+.action-btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    padding: 0.5rem 1rem;
+}
+
+.action-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Status Indicators */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-badge.clean {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-badge.dirty {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.status-badge.processing {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .stat-card .stat-value {
+        font-size: 1.5rem;
+    }
+    
+    .stat-card .stat-icon {
+        font-size: 2rem;
+    }
+    
+    .dashboard-card .card-body {
+        padding: 1rem;
+    }
+    
+    .preprocessing-tool-card .card-body {
+        padding: 1rem;
+    }
+}
+
+/* Animation for state changes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tooltip styles */
+.tooltip-custom {
+    position: relative;
+    cursor: help;
+}
+
+.tooltip-custom::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 1000;
+}
+
+.tooltip-custom:hover::after {
+    opacity: 1;
+}
+
+/* Modal de información de valores faltantes */
+#missingValuesInfoModal .modal-header {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+}
+
+#missingValuesInfoModal .accordion-button:not(.collapsed) {
+    background-color: #e3f2fd;
+    color: #1976d2;
+}
+
+#missingValuesInfoModal .accordion-button:focus {
+    box-shadow: 0 0 0 0.2rem rgba(25, 118, 210, 0.25);
+}
+
+#missingValuesInfoModal .accordion-item {
+    border: 1px solid #dee2e6;
+    margin-bottom: 0.5rem;
+    border-radius: 8px;
+}
+
+#missingValuesInfoModal .accordion-button {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+#missingValuesInfoModal .card {
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+#missingValuesInfoModal .alert {
+    border-radius: 8px;
+    border: none;
+}
+
+#missingValuesInfoModal .btn-outline-info {
+    border-color: #17a2b8;
+    color: #17a2b8;
+}
+
+#missingValuesInfoModal .btn-outline-info:hover {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: white;
+} 

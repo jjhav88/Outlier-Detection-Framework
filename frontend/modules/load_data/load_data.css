@@ -1,0 +1,293 @@
+/* Specific CSS styles for load_data module */
+
+.upload-area {
+    border: 2px dashed var(--primary-color);
+    border-radius: 10px;
+    padding: 3rem;
+    text-align: center;
+    background-color: rgba(13, 110, 253, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.upload-area:hover {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.upload-area.dragover {
+    background-color: rgba(13, 110, 253, 0.2);
+    border-color: #0056b3;
+    transform: scale(1.02);
+}
+
+.upload-area.dragover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(13, 110, 253, 0.1);
+    z-index: 1;
+}
+
+.upload-area.file-valid {
+    border-color: #198754;
+    background-color: rgba(25, 135, 84, 0.05);
+    animation: pulse-success 0.5s ease;
+}
+
+.upload-area.file-invalid {
+    border-color: #dc3545;
+    background-color: rgba(220, 53, 69, 0.05);
+    animation: shake 0.5s ease;
+}
+
+.upload-area.file-validating {
+    border-color: #ffc107;
+    background-color: rgba(255, 193, 7, 0.05);
+}
+
+@keyframes pulse-success {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    75% {
+        transform: translateX(10px);
+    }
+}
+
+.upload-area .upload-content {
+    position: relative;
+    z-index: 2;
+}
+
+.upload-area .upload-content ul {
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.dataset-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 1rem;
+}
+
+.dataset-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.dataset-card .card-header {
+    background: linear-gradient(135deg, var(--primary-color), #0056b3);
+    color: white;
+    border-bottom: none;
+    padding: 1rem;
+}
+
+.dataset-card .card-body {
+    padding: 1.5rem;
+}
+
+.dataset-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.dataset-stats {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: #f8f9fa;
+    border-radius: 6px;
+    border: 1px solid #e9ecef;
+}
+
+.stat-item i {
+    color: var(--primary-color);
+}
+
+.dataset-actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+}
+
+.icon-btn:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.1);
+}
+
+.icon-btn.view {
+    color: var(--info-color);
+}
+
+.icon-btn.edit {
+    color: var(--warning-color);
+}
+
+.icon-btn.delete {
+    color: var(--danger-color);
+}
+
+.icon-btn.preview {
+    color: var(--success-color);
+}
+
+.variable-types-section {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.variable-types-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.variable-type-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+    border: 1px solid #e9ecef;
+}
+
+.variable-name {
+    font-weight: 500;
+    color: #495057;
+}
+
+.badge {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.progress {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #e9ecef;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, var(--primary-color), #0056b3);
+    transition: width 0.3s ease;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-state i {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .upload-area {
+        padding: 2rem 1rem;
+    }
+    
+    .dataset-info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .dataset-stats {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .dataset-actions {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .variable-types-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Loading animation */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading {
+    animation: pulse 1.5s infinite;
+}
+
+/* File type icons */
+.file-type-icon {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.file-type-csv {
+    color: #28a745;
+}
+
+.file-type-excel {
+    color: #17a2b8;
+}
+
+/* Upload success animation */
+@keyframes successPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.upload-success {
+    animation: successPulse 0.5s ease-in-out;
+} 

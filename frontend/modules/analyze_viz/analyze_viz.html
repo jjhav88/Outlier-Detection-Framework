@@ -1,0 +1,1504 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fas fa-chart-bar me-2"></i>
+                        Análisis y Visualización
+                    </h4>
+                    <p class="card-text">
+                        Módulo de análisis y visualización de outliers. Aquí podrás realizar análisis estadísticos comparativos entre los outliers detectados y el resto de la población.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dataset Information -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-database me-2"></i>
+                        Dataset para Análisis
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div id="datasetInfoContainer">
+                        <!-- La información del dataset se cargará automáticamente desde localStorage -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección de Análisis -->
+    <div class="row mb-4" id="analysisSection" style="display: none;">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-microscope me-2 text-primary"></i>
+                        Análisis Estadístico de Outliers
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <!-- Información del Dataset -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <h6 class="mb-3">
+                                <i class="fas fa-chart-bar me-2 text-primary"></i>
+                                Resumen Estadístico de Outliers
+                            </h6>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="card text-center border-primary">
+                                        <div class="card-body">
+                                            <div class="text-primary mb-2">
+                                                <i class="fas fa-database fa-2x"></i>
+                                            </div>
+                                            <h5 class="card-title text-primary" id="totalRecordsCard">0</h5>
+                                            <p class="card-text small">Total de Registros</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card text-center border-danger">
+                                        <div class="card-body">
+                                            <div class="text-danger mb-2">
+                                                <i class="fas fa-exclamation-triangle fa-2x"></i>
+                                            </div>
+                                            <h5 class="card-title text-danger" id="totalOutliersCard">0</h5>
+                                            <p class="card-text small">Outliers Detectados</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card text-center border-success">
+                                        <div class="card-body">
+                                            <div class="text-success mb-2">
+                                                <i class="fas fa-check-circle fa-2x"></i>
+                                            </div>
+                                            <h5 class="card-title text-success" id="totalNormalCard">0</h5>
+                                            <p class="card-text small">Datos Normales</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card text-center border-info">
+                                        <div class="card-body">
+                                            <div class="text-info mb-2">
+                                                <i class="fas fa-percentage fa-2x"></i>
+                                            </div>
+                                            <h5 class="card-title text-info" id="outlierPercentageCard">0%</h5>
+                                            <p class="card-text small">Porcentaje de Outliers</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tabs de Análisis -->
+                    <div class="row">
+                        <div class="col-12">
+                            <ul class="nav nav-tabs" id="analysisTabs" role="tablist">
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link active" id="primary-tab" data-bs-toggle="tab" data-bs-target="#primary" type="button" role="tab" aria-controls="primary" aria-selected="true">
+                                        <i class="fas fa-chart-line me-2"></i>
+                                        Análisis Primario
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="advanced-tab" data-bs-toggle="tab" data-bs-target="#advanced" type="button" role="tab" aria-controls="advanced" aria-selected="false">
+                                        <i class="fas fa-chart-area me-2"></i>
+                                        Análisis Avanzado
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="clinical-tab" data-bs-toggle="tab" data-bs-target="#clinical" type="button" role="tab" aria-controls="clinical" aria-selected="false">
+                                        <i class="fas fa-stethoscope me-2"></i>
+                                        Interpretación Clínica y Validación
+                                    </button>
+                                </li>
+                                <li class="nav-item" role="presentation">
+                                    <button class="nav-link" id="comprehensive-tab" data-bs-toggle="tab" data-bs-target="#comprehensive" type="button" role="tab" aria-controls="comprehensive" aria-selected="false">
+                                        <i class="fas fa-microscope me-2"></i>
+                                        Marco Analítico Completo
+                                    </button>
+                                </li>
+                            </ul>
+                            
+                            <div class="tab-content" id="analysisTabContent">
+                                <!-- Tab de Análisis Primario -->
+                                <div class="tab-pane fade show active" id="primary" role="tabpanel" aria-labelledby="primary-tab">
+                                    <div class="mt-4">
+                                        <!-- Botón para ejecutar análisis -->
+                                        <div class="row mb-4">
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn-primary" id="runPrimaryAnalysis">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Análisis Primario
+                                                </button>
+                                                <div class="form-text">
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-info-circle me-1"></i>
+                                                        Este análisis incluye estadísticas descriptivas comparativas, prueba U de Mann-Whitney y prueba de Chi-Cuadrado
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Resultados del Análisis Primario -->
+                                        <div id="primaryAnalysisResults" style="display: none;">
+                                            <!-- Análisis Descriptivo -->
+                                            <div class="accordion-item rounded mb-2">
+                                                <h2 class="accordion-header" id="descriptiveHeader">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#descriptiveResults" aria-expanded="false" aria-controls="descriptiveResults">
+                                                        Análisis Descriptivo Comparativo
+                                                    </button>
+                                                </h2>
+                                                <div id="descriptiveResults" class="accordion-collapse collapse" aria-labelledby="descriptiveHeader" data-bs-parent="#primaryAnalysisAccordion">
+                                                    <div class="accordion-body">
+                                                        <div class="alert alert-secondary">
+                                                            <h6 class="alert-heading">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Descripción del Análisis Descriptivo:
+                                                            </h6>
+                                                            <p class="mb-0">
+                                                                Este análisis compara las estadísticas descriptivas (media, mediana, desviación estándar) entre los outliers y el resto de la población para cada variable numérica. Para variables categóricas, muestra las frecuencias y proporciones de cada categoría.
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Selector de Variables -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <label for="descriptiveVariableSelector" class="form-label">
+                                                                    <i class="fas fa-list me-2"></i>
+                                                                    Seleccionar Variable:
+                                                                </label>
+                                                                <select class="form-select" id="descriptiveVariableSelector">
+                                                                    <option value="">-- Selecciona una variable --</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- Contenedor de Resultados -->
+                                                        <div id="descriptiveResultsContainer">
+                                                            <div class="alert alert-info">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Selecciona una variable del menú desplegable para ver su análisis descriptivo comparativo.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Prueba U de Mann-Whitney -->
+                                            <div class="accordion-item rounded mb-2">
+                                                <h2 class="accordion-header" id="mannWhitneyHeader">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#mannWhitneyResults" aria-expanded="false" aria-controls="mannWhitneyResults">
+                                                        Prueba U de Mann-Whitney
+                                                    </button>
+                                                </h2>
+                                                <div id="mannWhitneyResults" class="accordion-collapse collapse" aria-labelledby="mannWhitneyHeader" data-bs-parent="#primaryAnalysisAccordion">
+                                                    <div class="accordion-body">
+                                                        <div class="alert alert-secondary">
+                                                            <h6 class="alert-heading">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Descripción de la Prueba U de Mann-Whitney:
+                                                            </h6>
+                                                            <p class="mb-0">
+                                                                Esta prueba no paramétrica compara las distribuciones de una variable numérica entre dos grupos (outliers vs no-outliers). No asume normalidad, lo que la hace ideal para analizar outliers. Un p-valor < 0.05 indica diferencias significativas entre los grupos.
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Selector de Variables Numéricas -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <label for="mannWhitneyVariableSelector" class="form-label">
+                                                                    <i class="fas fa-list me-2"></i>
+                                                                    Seleccionar Variable Numérica:
+                                                                </label>
+                                                                <select class="form-select" id="mannWhitneyVariableSelector">
+                                                                    <option value="">-- Selecciona una variable numérica --</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- Contenedor de Resultados -->
+                                                        <div id="mannWhitneyResultsContainer">
+                                                            <div class="alert alert-info">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Selecciona una variable numérica del menú desplegable para ver los resultados de la prueba U de Mann-Whitney.
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- Panel de Gráficos de Violín para Publicación -->
+                                                        <div class="row mt-4">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-light">
+                                                                        <h6 class="mb-0">
+                                                                            <i class="fas fa-chart-area me-2"></i>
+                                                                            Gráficos de Violín con Boxplot para Publicación
+                                                                        </h6>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <p class="text-muted small mb-3">
+                                                                            Genera gráficos de violín con diagramas de caja internos para mostrar la distribución de variables entre grupos (outliers vs normales). 
+                                                                            Ideal para figuras de publicación científica.
+                                                                        </p>
+                                                                        
+                                                                        <!-- Selector de variables para gráficos de violín -->
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-md-6">
+                                                                                <label for="violinPlotVariableSelector" class="form-label">
+                                                                                    <i class="fas fa-list me-2"></i>
+                                                                                    Seleccionar Variable para Gráfico de Violín:
+                                                                                </label>
+                                                                                <select class="form-select" id="violinPlotVariableSelector">
+                                                                                    <option value="">-- Selecciona una variable numérica --</option>
+                                                                                </select>
+                                                                            </div>
+                                                                            <div class="col-md-6 d-flex align-items-end">
+                                                                                <button type="button" class="btn btn-success" id="generateViolinPlotBtn">
+                                                                                    <i class="fas fa-chart-bar me-2"></i>
+                                                                                    Generar Gráfico de Violín
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <!-- Contenedor para gráfico de violín -->
+                                                                        <div id="violinPlotContainer" style="display: none;">
+                                                                            <div id="violinPlotChart"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- Panel de Boxplots de Significancia -->
+                                                        <div class="row mt-4">
+                                                            <div class="col-12">
+                                                                <div class="card">
+                                                                    <div class="card-header bg-light">
+                                                                        <h6 class="mb-0">
+                                                                            <i class="fas fa-chart-box me-2"></i>
+                                                                            Boxplots de Significancia (P-values)
+                                                                        </h6>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <!-- Selector múltiple de variables -->
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-md-12">
+                                                                                <label for="mannWhitneyMultiVariableSelector" class="form-label">
+                                                                                    <i class="fas fa-list-check me-2"></i>
+                                                                                    Seleccionar Variables para Comparar (múltiple selección):
+                                                                                </label>
+                                                                                <select class="form-select" id="mannWhitneyMultiVariableSelector" multiple size="5">
+                                                                                    <!-- Se llenará dinámicamente -->
+                                                                                </select>
+                                                                                <small class="form-text text-muted">
+                                                                                    Mantén presionada la tecla Ctrl (Windows) o Cmd (Mac) para seleccionar múltiples variables.
+                                                                                </small>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <!-- Botón para generar gráfico comparativo -->
+                                                                        <div class="row mb-3">
+                                                                            <div class="col-md-12">
+                                                                                <button type="button" class="btn btn-success" id="generateMannWhitneyBoxplotBtn">
+                                                                                    <i class="fas fa-chart-bar me-2"></i>
+                                                                                    Generar Boxplot Comparativo
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        
+                                                                        <!-- Contenedor para boxplot individual (variable seleccionada) -->
+                                                                        <div id="mannWhitneySingleBoxplotContainer" class="mb-3" style="display: none;">
+                                                                            <h6 class="mb-2">Boxplot de Significancia - Variable Seleccionada</h6>
+                                                                            <div id="mannWhitneySingleBoxplot"></div>
+                                                                        </div>
+                                                                        
+                                                                        <!-- Contenedor para boxplot comparativo (múltiples variables) -->
+                                                                        <div id="mannWhitneyMultiBoxplotContainer" class="mb-3" style="display: none;">
+                                                                            <h6 class="mb-2">Boxplot Comparativo de Significancia</h6>
+                                                                            <div id="mannWhitneyMultiBoxplot"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Prueba de Chi-Cuadrado -->
+                                            <div class="accordion-item rounded mb-2">
+                                                <h2 class="accordion-header" id="chiSquareHeader">
+                                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#chiSquareResults" aria-expanded="false" aria-controls="chiSquareResults">
+                                                        Prueba de Chi-Cuadrado (χ²)
+                                                    </button>
+                                                </h2>
+                                                <div id="chiSquareResults" class="accordion-collapse collapse" aria-labelledby="chiSquareHeader" data-bs-parent="#primaryAnalysisAccordion">
+                                                    <div class="accordion-body">
+                                                        <div class="alert alert-secondary">
+                                                            <h6 class="alert-heading">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Descripción de la Prueba de Chi-Cuadrado:
+                                                            </h6>
+                                                            <p class="mb-0">
+                                                                Esta prueba determina si existe una relación estadísticamente significativa entre la variable categórica y el estado de outlier. Un p-valor < 0.05 indica que la distribución de categorías es significativamente diferente entre outliers y no-outliers.
+                                                            </p>
+                                                        </div>
+                                                        
+                                                        <!-- Selector de Variables Categóricas -->
+                                                        <div class="row mb-3">
+                                                            <div class="col-md-6">
+                                                                <label for="chiSquareVariableSelector" class="form-label">
+                                                                    <i class="fas fa-list me-2"></i>
+                                                                    Seleccionar Variable Categórica:
+                                                                </label>
+                                                                <select class="form-select" id="chiSquareVariableSelector">
+                                                                    <option value="">-- Selecciona una variable categórica --</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <!-- Contenedor de Resultados -->
+                                                        <div id="chiSquareResultsContainer">
+                                                            <div class="alert alert-info">
+                                                                <i class="fas fa-info-circle me-2"></i>
+                                                                Selecciona una variable categórica del menú desplegable para ver los resultados de la prueba de Chi-Cuadrado.
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Tab de Análisis Avanzado -->
+                                <div class="tab-pane fade" id="advanced" role="tabpanel" aria-labelledby="advanced-tab">
+                                    <div class="mt-4">
+                                        <!-- Botón para ejecutar análisis -->
+                                        <div class="row mb-4">
+                                            <div class="col-12">
+                                                <button type="button" class="btn btn-success" id="runAdvancedAnalysis">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Análisis Avanzado
+                                                </button>
+                                                <div class="form-text">
+                                                    <small class="text-muted">
+                                                        <i class="fas fa-info-circle me-1"></i>
+                                                        Análisis multivariado y modelos de regresión para comprensión profunda del perfil de outliers
+                                                    </small>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Resultados del Análisis Avanzado -->
+                                        <div id="advancedAnalysisResults" style="display: none;">
+                                            <!-- Accordion para los diferentes análisis -->
+                                            <div class="accordion" id="advancedAnalysisAccordion">
+                                                
+                                                <!-- Análisis de Regresión Robusta -->
+                                                <div class="accordion-item rounded mb-2">
+                                                    <h2 class="accordion-header" id="robustRegressionHeader">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#robustRegressionResults" aria-expanded="false" aria-controls="robustRegressionResults">
+                                                            <i class="fas fa-chart-line me-2 text-success"></i>
+                                                            Análisis de Regresión Robusta
+                                                        </button>
+                                                    </h2>
+                                                    <div id="robustRegressionResults" class="accordion-collapse collapse" aria-labelledby="robustRegressionHeader" data-bs-parent="#advancedAnalysisAccordion">
+                                                        <div class="accordion-body">
+                                                            <div class="alert alert-secondary">
+                                                                <h6 class="alert-heading">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Descripción del Análisis de Regresión Robusta:
+                                                                </h6>
+                                                                <p class="mb-2">
+                                                                    <strong>Propósito:</strong> Este análisis valida que los outliers detectados son realmente atípicos en el contexto multivariado y permite entender las relaciones entre variables sin que los outliers distorsionen los coeficientes.
+                                                                </p>
+                                                                <p class="mb-2">
+                                                                    <strong>¿Cómo funciona?</strong> Compara un modelo de regresión lineal estándar (OLS) con un modelo robusto (IRLS con función Huber). El modelo robusto asigna pesos menores a las observaciones atípicas, identificando qué outliers tienen relaciones diferentes con las variables predictoras.
+                                                                </p>
+                                                                <p class="mb-0">
+                                                                    <strong>Nota importante:</strong> La variable <code>es_outlier</code> es categórica y no puede usarse como variable dependiente (Y) en regresión robusta. En su lugar, selecciona cualquier gen/variable numérica como Y y otros genes como predictoras. El análisis mostrará cómo los outliers detectados tienen relaciones atípicas con estas variables.
+                                                                </p>
+                                                            </div>
+                                                            
+                                                            <!-- Configuración del modelo -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-4">
+                                                                    <label for="robustRegressionTarget" class="form-label">
+                                                                        <i class="fas fa-bullseye me-2"></i>
+                                                                        Variable Objetivo (Y):
+                                                                    </label>
+                                                                    <select class="form-select" id="robustRegressionTarget">
+                                                                        <option value="">-- Selecciona variable objetivo --</option>
+                                                                    </select>
+                                                                    <div class="form-text">
+                                                                        <small class="text-muted">Selecciona cualquier gen/variable numérica de interés. Ejemplo: TNFALFA, IL6, etc.</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-8">
+                                                                    <label for="robustRegressionPredictors" class="form-label">
+                                                                        <i class="fas fa-list me-2"></i>
+                                                                        Variables Predictoras (X):
+                                                                    </label>
+                                                                    <select class="form-select" id="robustRegressionPredictors" multiple size="5">
+                                                                        <option value="">-- Selecciona variables predictoras --</option>
+                                                                    </select>
+                                                                    <div class="form-text">
+                                                                        <small class="text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples variables. Mínimo 2 predictoras requeridas. Selecciona genes que puedan explicar la variable objetivo.</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Contenedor de Resultados -->
+                                                            <div id="robustRegressionResultsContainer">
+                                                                <div class="alert alert-info">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Selecciona las variables y ejecuta el análisis para ver los resultados de regresión robusta.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Análisis de Componentes Principales (PCA) -->
+                                                <div class="accordion-item rounded mb-2">
+                                                    <h2 class="accordion-header" id="pcaHeader">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#pcaResults" aria-expanded="false" aria-controls="pcaResults">
+                                                            <i class="fas fa-cube me-2 text-primary"></i>
+                                                            Análisis de Componentes Principales (PCA)
+                                                        </button>
+                                                    </h2>
+                                                    <div id="pcaResults" class="accordion-collapse collapse" aria-labelledby="pcaHeader" data-bs-parent="#advancedAnalysisAccordion">
+                                                        <div class="accordion-body">
+                                                            <div class="alert alert-secondary">
+                                                                <h6 class="alert-heading">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Descripción del Análisis de Componentes Principales:
+                                                                </h6>
+                                                                <p class="mb-0">
+                                                                    El PCA reduce la dimensionalidad de los datos y permite visualizar la distribución de outliers en un espacio multivariado. El número de componentes se determina automáticamente usando criterios estadísticos robustos (Varianza Total Explicada y Criterio de Kaiser). Los outliers se resaltan con colores diferentes para identificar patrones distintivos.
+                                                                </p>
+                                                            </div>
+                                                            
+                                                            <!-- Configuración del PCA -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-12">
+                                                                    <label for="pcaVariables" class="form-label">
+                                                                        <i class="fas fa-list me-2"></i>
+                                                                        Variables Numéricas para PCA:
+                                                                    </label>
+                                                                    <select class="form-select" id="pcaVariables" multiple size="6">
+                                                                        <option value="">-- Selecciona variables numéricas --</option>
+                                                                    </select>
+                                                                    <div class="form-text">
+                                                                        <small class="text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples variables. El número de componentes se determinará automáticamente usando criterios estadísticos robustos.</small>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Contenedor de Resultados -->
+                                                            <div id="pcaResultsContainer">
+                                                                <div class="alert alert-info">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Selecciona las variables numéricas y ejecuta el análisis para ver los resultados del PCA.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Regresión Logística para Perfil de Outliers -->
+                                                <div class="accordion-item rounded mb-2">
+                                                    <h2 class="accordion-header" id="logisticRegressionHeader">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#logisticRegressionResults" aria-expanded="false" aria-controls="logisticRegressionResults">
+                                                            <i class="fas fa-chart-area me-2 text-warning"></i>
+                                                            Regresión Logística para Perfil de Outliers
+                                                        </button>
+                                                    </h2>
+                                                    <div id="logisticRegressionResults" class="accordion-collapse collapse" aria-labelledby="logisticRegressionHeader" data-bs-parent="#advancedAnalysisAccordion">
+                                                        <div class="accordion-body">
+                                                            <div class="alert alert-secondary">
+                                                                <h6 class="alert-heading">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Descripción de la Regresión Logística para el Perfil de Outliers:
+                                                                </h6>
+                                                                <p class="mb-0">
+                                                                    Este análisis busca entender qué variables clínicas o demográficas son las más influyentes para predecir si una persona es un outlier o no. El modelo construye un "perfil" de los outliers identificando los predictores más fuertes de la atipicidad. A diferencia de los métodos de detección que simplemente indican si un valor es atípico, la regresión logística explica por qué es atípico en términos de las variables incluidas en el modelo.
+                                                                </p>
+                                                            </div>
+                                                            
+                                                            <!-- Configuración del modelo -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-6">
+                                                                    <label for="logisticRegressionPredictors" class="form-label">
+                                                                        <i class="fas fa-list me-2"></i>
+                                                                        Variables Predictoras:
+                                                                    </label>
+                                                                    <select class="form-select" id="logisticRegressionPredictors" multiple size="8">
+                                                                        <option value="">-- Selecciona variables predictoras --</option>
+                                                                    </select>
+                                                                    <div class="form-text">
+                                                                        <small class="text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples variables</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-6">
+                                                                    <label for="logisticRegressionTestSize" class="form-label">
+                                                                        <i class="fas fa-percentage me-2"></i>
+                                                                        Tamaño del Conjunto de Prueba:
+                                                                    </label>
+                                                                    <select class="form-select" id="logisticRegressionTestSize">
+                                                                        <option value="0.2">20% (80% entrenamiento)</option>
+                                                                        <option value="0.25">25% (75% entrenamiento)</option>
+                                                                        <option value="0.3">30% (70% entrenamiento)</option>
+                                                                        <option value="0.4">40% (60% entrenamiento)</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Panel Explicativo del Tamaño del Conjunto de Prueba -->
+                                                            <div class="alert alert-light border-start border-warning border-4 mb-3">
+                                                                <div class="row">
+                                                                    <div class="col-1 text-center">
+                                                                        <i class="fas fa-lightbulb text-warning fa-2x"></i>
+                                                                    </div>
+                                                                    <div class="col-11">
+                                                                        <h6 class="alert-heading mb-2">
+                                                                            <i class="fas fa-info-circle me-2 text-warning"></i>
+                                                                            ¿Qué es el Tamaño del Conjunto de Prueba?
+                                                                        </h6>
+                                                                        <p class="mb-2">
+                                                                            <strong>Propósito:</strong> Divide tus datos en dos grupos para evaluar qué tan bien funciona el modelo con datos nuevos que no ha visto antes.
+                                                                        </p>
+                                                                        <div class="row mb-2">
+                                                                            <div class="col-md-6">
+                                                                                <span class="badge bg-primary me-2">Conjunto de Entrenamiento</span>
+                                                                                <small>Se usa para enseñar al modelo</small>
+                                                                            </div>
+                                                                            <div class="col-md-6">
+                                                                                <span class="badge bg-success me-2">Conjunto de Prueba</span>
+                                                                                <small>Se usa para evaluar el rendimiento</small>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="alert alert-warning py-2 mb-1">
+                                                                            <small>
+                                                                                <i class="fas fa-thumbs-up me-2"></i>
+                                                                                <strong>Recomendación:</strong> Para datasets pequeños (&lt;100 registros), usa 20%. Para datasets grandes (&gt;500 registros), puedes usar hasta 30-40%.
+                                                                            </small>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Contenedor de Resultados -->
+                                                            <div id="logisticRegressionResultsContainer">
+                                                                <div class="alert alert-info">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Selecciona las variables predictoras y ejecuta el análisis para ver los resultados de la regresión logística.
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Análisis de Clustering -->
+                                                <div class="accordion-item rounded mb-2">
+                                                    <h2 class="accordion-header" id="clusteringHeader">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#clusteringResults" aria-expanded="false" aria-controls="clusteringResults">
+                                                            <i class="fas fa-sitemap me-2 text-info"></i>
+                                                            Análisis de Clustering
+                                                        </button>
+                                                    </h2>
+                                                    <div id="clusteringResults" class="accordion-collapse collapse" aria-labelledby="clusteringHeader" data-bs-parent="#advancedAnalysisAccordion">
+                                                        <div class="accordion-body">
+                                                            <div class="alert alert-secondary">
+                                                                <h6 class="alert-heading">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Descripción del Análisis de Clustering:
+                                                                </h6>
+                                                                <p class="mb-0">
+                                                                    Este análisis identifica estructuras de agrupación naturales en los datos mediante técnicas de clustering. El objetivo es descubrir patrones ocultos y agrupar observaciones similares, lo que puede revelar subpoblaciones distintas en tu dataset. El análisis determina automáticamente el número óptimo de clústeres usando múltiples métodos estadísticos robustos.
+                                                                </p>
+                                                            </div>
+                                                            
+                                                            <!-- Configuración del análisis -->
+                                                            <div class="row mb-3">
+                                                                <div class="col-md-8">
+                                                                    <label for="clusteringVariablesSelector" class="form-label">
+                                                                        <i class="fas fa-list me-2"></i>
+                                                                        Variables Numéricas para Clustering:
+                                                                    </label>
+                                                                    <select class="form-select" id="clusteringVariablesSelector" multiple size="8">
+                                                                        <option value="">-- Selecciona variables numéricas --</option>
+                                                                    </select>
+                                                                    <div class="form-text">
+                                                                        <small class="text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples variables. Selecciona al menos 2 variables.</small>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-4">
+                                                                    <label class="form-label">
+                                                                        <i class="fas fa-cogs me-2"></i>
+                                                                        Acciones:
+                                                                    </label>
+                                                                    <div class="d-grid gap-2">
+                                                                        <button type="button" class="btn btn-primary" id="calculateOptimalK">
+                                                                            <i class="fas fa-calculator me-2"></i>
+                                                                            Calcular K Óptimo
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Contenedor de Resultados -->
+                                                            <div id="clusteringResultsContainer">
+                                                                <div class="alert alert-info">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Selecciona las variables numéricas y ejecuta el análisis para determinar el número óptimo de clústeres.
+                                                                </div>
+                                                            </div>
+                                                            
+                                                            <!-- Sección 2: K-means y Visualización -->
+                                                            <div id="kmeansSection" style="display: none;">
+                                                                <hr class="my-4">
+                                                                <div class="alert alert-success">
+                                                                    <h6 class="alert-heading">
+                                                                        <i class="fas fa-chart-scatter me-2"></i>
+                                                                        Sección 2: Aplicación de K-means y Visualización
+                                                                    </h6>
+                                                                    <p class="mb-0">
+                                                                        Una vez determinado el número óptimo de clústeres, puedes aplicar el algoritmo K-means y visualizar los resultados en un espacio de componentes principales (PCA).
+                                                                    </p>
+                                                                </div>
+                                                                
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <div class="card border-success">
+                                                                            <div class="card-header bg-success text-white">
+                                                                                <h6 class="mb-0">
+                                                                                    <i class="fas fa-cogs me-2"></i>
+                                                                                    Configuración de K-means
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label">
+                                                                                            <i class="fas fa-hashtag me-2"></i>
+                                                                                            K Óptimo Determinado:
+                                                                                        </label>
+                                                                                        <div class="alert alert-primary py-2 mb-2">
+                                                                                            <span class="h5 mb-0" id="optimalKDisplay">-</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label">
+                                                                                            <i class="fas fa-list me-2"></i>
+                                                                                            Variables Seleccionadas:
+                                                                                        </label>
+                                                                                        <div class="alert alert-info py-2 mb-2">
+                                                                                            <small id="selectedVariablesDisplay">-</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="d-grid">
+                                                                                    <button type="button" class="btn btn-success" id="applyKmeans">
+                                                                                        <i class="fas fa-play me-2"></i>
+                                                                                        Aplicar K-means
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="card border-info">
+                                                                            <div class="card-header bg-info text-white">
+                                                                                <h6 class="mb-0">
+                                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                                    Información del Análisis
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <p class="mb-2">
+                                                                                    <strong>K-means:</strong> Algoritmo de clustering que agrupa observaciones similares en clústeres.
+                                                                                </p>
+                                                                                <p class="mb-2">
+                                                                                    <strong>PCA:</strong> Reduce la dimensionalidad para visualizar los clústeres en 2D.
+                                                                                </p>
+                                                                                <p class="mb-0">
+                                                                                    <strong>Elipses:</strong> Muestran la distribución y forma de cada clúster.
+                                                                                </p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <!-- Contenedor de Resultados de K-means -->
+                                                                <div id="kmeansResultsContainer">
+                                                                    <div class="alert alert-info">
+                                                                        <i class="fas fa-info-circle me-2"></i>
+                                                                        Haz clic en "Aplicar K-means" para ejecutar el algoritmo y visualizar los resultados.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- Sección 3: Clustering Jerárquico -->
+                                                            <div id="hierarchicalSection" style="display: none;">
+                                                                <hr class="my-4">
+                                                                <div class="alert alert-success">
+                                                                    <h6 class="alert-heading">
+                                                                        <i class="fas fa-sitemap me-2"></i>
+                                                                        Sección 3: Clustering Jerárquico y Dendrogramas
+                                                                    </h6>
+                                                                    <p class="mb-0">
+                                                                        Una vez determinado el número óptimo de clústeres, puedes aplicar clustering jerárquico aglomerativo usando el método de Ward y visualizar los resultados con dendrogramas y proyección PCA.
+                                                                    </p>
+                                                                </div>
+                                                                
+                                                                <div class="row mb-3">
+                                                                    <div class="col-md-6">
+                                                                        <div class="card border-success">
+                                                                            <div class="card-header bg-success text-white">
+                                                                                <h6 class="mb-0">
+                                                                                    <i class="fas fa-cogs me-2"></i>
+                                                                                    Configuración del Clustering Jerárquico
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label">
+                                                                                            <i class="fas fa-hashtag me-2"></i>
+                                                                                            K Óptimo Determinado:
+                                                                                        </label>
+                                                                                        <div class="alert alert-primary py-2 mb-2">
+                                                                                            <span class="h5 mb-0" id="hierarchicalOptimalKDisplay">-</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="form-label">
+                                                                                            <i class="fas fa-list me-2"></i>
+                                                                                            Variables Seleccionadas:
+                                                                                        </label>
+                                                                                        <div class="alert alert-info py-2 mb-2">
+                                                                                            <small id="hierarchicalSelectedVariablesDisplay">-</small>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="mb-3">
+                                                                                    <label class="form-label">
+                                                                                        <i class="fas fa-id-card me-2"></i>
+                                                                                        Columna de ID (opcional):
+                                                                                    </label>
+                                                                                    <select class="form-select" id="hierarchicalIdColumn">
+                                                                                        <option value="">Sin columna de ID</option>
+                                                                                    </select>
+                                                                                    <div class="form-text">
+                                                                                        Selecciona una columna para etiquetar los puntos en el gráfico.
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="d-grid">
+                                                                                    <button type="button" class="btn btn-success" id="applyHierarchical">
+                                                                                        <i class="fas fa-play me-2"></i>
+                                                                                        Generar Dendrogramas
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-6">
+                                                                        <div class="card border-info">
+                                                                            <div class="card-header bg-info text-white">
+                                                                                <h6 class="mb-0">
+                                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                                    Información del Análisis
+                                                                                </h6>
+                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <p class="mb-2">
+                                                                                    <strong>Clustering Jerárquico:</strong> Construye una jerarquía de clústeres de forma aglomerativa.
+                                                                                </p>
+                                                                                <p class="mb-2">
+                                                                                    <strong>Dendrograma:</strong> Visualiza la estructura jerárquica de agrupación.
+                                                                                </p>
+                                                                                <p class="mb-0">
+                                                                                    <strong>PCA:</strong> Proyecta los clústeres en un espacio bidimensional.
+                                                                                </p>
+                                                                                
+                                                                                <hr class="my-3">
+                                                                                
+                                                                                <div class="mb-3">
+                                                                                    <label class="form-label fw-bold">
+                                                                                        <i class="fas fa-link me-2"></i>
+                                                                                        Método de Enlace:
+                                                                                    </label>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="radio" name="linkageMethod" id="linkageSingle" value="single" checked>
+                                                                                        <label class="form-check-label" for="linkageSingle">
+                                                                                            Enlace Sencillo
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="radio" name="linkageMethod" id="linkageComplete" value="complete">
+                                                                                        <label class="form-check-label" for="linkageComplete">
+                                                                                            Enlace Completo
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="radio" name="linkageMethod" id="linkageAverage" value="average">
+                                                                                        <label class="form-check-label" for="linkageAverage">
+                                                                                            Enlace Promedio
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="radio" name="linkageMethod" id="linkageCentroid" value="centroid">
+                                                                                        <label class="form-check-label" for="linkageCentroid">
+                                                                                            Enlace de Centroide
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-check">
+                                                                                        <input class="form-check-input" type="radio" name="linkageMethod" id="linkageWard" value="ward">
+                                                                                        <label class="form-check-label" for="linkageWard">
+                                                                                            Método de Ward
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                                
+                                                                                <div class="d-grid">
+                                                                                    <button type="button" class="btn btn-outline-info btn-sm" id="linkageInfoBtn">
+                                                                                        <i class="fas fa-question-circle me-2"></i>
+                                                                                        Información
+                                                                                    </button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <!-- Contenedor de Resultados del Clustering Jerárquico -->
+                                                                <div id="hierarchicalResultsContainer">
+                                                                    <div class="alert alert-info">
+                                                                        <i class="fas fa-info-circle me-2"></i>
+                                                                        Haz clic en "Generar Dendrogramas" para ejecutar el clustering jerárquico y visualizar los resultados.
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- Validación de Clustering -->
+                                                <div class="accordion-item rounded mb-2">
+                                                    <h2 class="accordion-header" id="clusteringValidationHeader">
+                                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#clusteringValidationResults" aria-expanded="false" aria-controls="clusteringValidationResults">
+                                                            <i class="fas fa-check-circle me-2 text-success"></i>
+                                                            Validación de Clustering
+                                                        </button>
+                                                    </h2>
+                                                    <div id="clusteringValidationResults" class="accordion-collapse collapse" aria-labelledby="clusteringValidationHeader" data-bs-parent="#advancedAnalysisAccordion">
+                                                        <div class="accordion-body">
+                                                            <div class="alert alert-secondary">
+                                                                <h6 class="alert-heading">
+                                                                    <i class="fas fa-info-circle me-2"></i>
+                                                                    Descripción de la Validación de Clustering:
+                                                                </h6>
+                                                                <p class="mb-2">
+                                                                    Los métodos de clustering tienen la propiedad de encontrar agrupaciones en cualquier set de datos, independientemente de que realmente existan o no dichos grupos en la población de la que proceden las observaciones. La validación de clusters es el proceso por el cual se evalúa la veracidad de los grupos obtenidos.
+                                                                </p>
+                                                                <p class="mb-0">
+                                                                    Este proceso consta de tres partes: <strong>estudio de la tendencia de clustering</strong>, elección del número óptimo de clusters y estudio de la calidad/significancia de los clusters generados.
+                                                                </p>
+                                                            </div>
+
+                                                            <!-- Sección de Tendencia de Clustering -->
+                                                            <div class="card border-success mb-3">
+                                                                <div class="card-header bg-success text-white">
+                                                                    <h6 class="mb-0">
+                                                                        <i class="fas fa-chart-line me-2"></i>
+                                                                        Estudio de la Tendencia de Clustering
+                                                                    </h6>
+                                                                </div>
+                                                                <div class="card-body">
+                                                                    <div class="alert alert-info">
+                                                                        <h6 class="alert-heading">
+                                                                            <i class="fas fa-lightbulb me-2"></i>
+                                                                            ¿Por qué es importante?
+                                                                        </h6>
+                                                                        <p class="mb-2">
+                                                                            Antes de aplicar un método de clustering a los datos es conveniente evaluar si hay indicios de que realmente existe algún tipo de agrupación en ellos. A este proceso se le conoce como <strong>assessing cluster tendency</strong> y puede llevarse a cabo mediante test estadísticos (Hopkins statistic) o de forma visual (Visual Assessment of cluster Tendency).
+                                                                        </p>
+                                                                        <p class="mb-0">
+                                                                            Para ilustrar la importancia de este pre-análisis inicial, se aplica clustering a dos sets de datos: uno que sí contiene grupos reales (el dataset seleccionado para el análisis) y otro aleatoriamente simulado que no.
+                                                                        </p>
+                                                                    </div>
+
+                                                                    <div class="row mb-3">
+                                                                        <div class="col-md-6">
+                                                                            <div class="card border-primary">
+                                                                                <div class="card-header bg-primary text-white">
+                                                                                    <h6 class="mb-0">
+                                                                                        <i class="fas fa-cogs me-2"></i>
+                                                                                        Configuración
+                                                                                    </h6>
+                                                                                </div>
+                                                                                <div class="card-body">
+                                                                                    <div class="mb-3">
+                                                                                        <label for="validationVariables" class="form-label">
+                                                                                            <i class="fas fa-list me-2"></i>
+                                                                                            Variables Numéricas:
+                                                                                        </label>
+                                                                                        <select class="form-select" id="validationVariables" multiple size="6">
+                                                                                            <option value="">-- Selecciona variables numéricas --</option>
+                                                                                        </select>
+                                                                                        <div class="form-text">
+                                                                                            <small class="text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples variables</small>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="d-grid">
+                                                                                        <button type="button" class="btn btn-success" id="runClusteringValidation">
+                                                                                            <i class="fas fa-play me-2"></i>
+                                                                                            Analizar Tendencia de Clustering
+                                                                                        </button>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div class="card border-info">
+                                                                                <div class="card-header bg-info text-white">
+                                                                                    <h6 class="mb-0">
+                                                                                        <i class="fas fa-info-circle me-2"></i>
+                                                                                        Información del Análisis
+                                                                                    </h6>
+                                                                                </div>
+                                                                                <div class="card-body">
+                                                                                    <p class="mb-2">
+                                                                                        <strong>Dataset Real:</strong> Los datos originales del análisis que pueden contener agrupaciones naturales.
+                                                                                    </p>
+                                                                                    <p class="mb-2">
+                                                                                        <strong>Dataset Simulado:</strong> Datos generados aleatoriamente sin estructura de agrupación.
+                                                                                    </p>
+                                                                                    <p class="mb-2">
+                                                                                        <strong>Comparación Visual:</strong> Se muestran ambos datasets en proyección PCA para evaluar la tendencia de clustering.
+                                                                                    </p>
+                                                                                    <p class="mb-0">
+                                                                                        <strong>Interpretación:</strong> Si el dataset real muestra agrupaciones claras mientras que el simulado no, entonces existe evidencia de tendencia de clustering.
+                                                                                    </p>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <!-- Contenedor de Resultados de Validación -->
+                                                                    <div id="clusteringValidationResultsContainer">
+                                                                        <div class="alert alert-info">
+                                                                            <i class="fas fa-info-circle me-2"></i>
+                                                                            Selecciona las variables numéricas y ejecuta el análisis para evaluar la tendencia de clustering.
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Información de Métodos de Clustering -->
+<div class="modal fade" id="clusteringInfoModal" tabindex="-1" aria-labelledby="clusteringInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="clusteringInfoModalLabel">
+                    <i class="fas fa-info-circle me-2"></i>
+                    Información del Método
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="clusteringInfoModalBody">
+                <!-- El contenido se cargará dinámicamente -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal para Información de Métodos de Enlace -->
+<div class="modal fade" id="linkageInfoModal" tabindex="-1" aria-labelledby="linkageInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="linkageInfoModalLabel">
+                    <i class="fas fa-link me-2"></i>
+                    Tipos de Métodos de Enlace
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="linkageInfoModalBody">
+                <div class="row">
+                    <div class="col-12">
+                        <h6 class="text-primary mb-3">
+                            <i class="fas fa-info-circle me-2"></i>
+                            Descripción de los Métodos de Enlace
+                        </h6>
+                        
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-success">Enlace Sencillo (Single Linkage)</h6>
+                            <p class="mb-2">
+                                Este método utiliza la distancia mínima entre cualquier par de puntos de los dos clústeres. 
+                                Tiende a crear clústeres largos y delgados, y es muy sensible al ruido.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-info">Enlace Completo (Complete Linkage)</h6>
+                            <p class="mb-2">
+                                Utiliza la distancia máxima entre cualquier par de puntos de los dos clústeres. 
+                                Tiende a formar clústeres compactos y de forma esférica.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-warning">Enlace Promedio (Average Linkage)</h6>
+                            <p class="mb-2">
+                                Calcula la distancia promedio entre todos los pares de puntos en los dos clústeres. 
+                                Es un método intermedio entre el enlace sencillo y el completo, y es menos sensible al ruido.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-danger">Enlace de Centroide (Centroid Linkage)</h6>
+                            <p class="mb-2">
+                                Utiliza la distancia entre los centroides (los puntos medios) de los dos clústeres. 
+                                Es un método simple pero no siempre el más eficaz.
+                            </p>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <h6 class="fw-bold text-primary">Método de Ward (Ward's Method)</h6>
+                            <p class="mb-2">
+                                Este es un método basado en la varianza. Fusiona los clústeres que, al combinarse, 
+                                minimizan el aumento de la varianza total dentro del clúster. Es uno de los métodos 
+                                más populares y robustos para producir clústeres compactos y de tamaño similar.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab de Interpretación Clínica y Validación -->
+                <div class="tab-pane fade" id="clinical" role="tabpanel" aria-labelledby="clinical-tab">
+                    <!-- Botón para ejecutar análisis de correlaciones comparativo -->
+                    <div class="row mb-4">
+                            <div class="col-12">
+                                <button type="button" class="btn btn-info" id="runComparativeCorrelations">
+                                    <i class="fas fa-project-diagram me-2"></i>
+                                    Ejecutar Análisis de Correlaciones Comparativo
+                                </button>
+                                <div class="form-text">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Compara los patrones de correlación entre variables en outliers vs datos normales para identificar relaciones diferenciales
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Resultados del Análisis de Correlaciones Comparativo -->
+                        <div id="comparativeCorrelationsResultsContainer">
+                            <!-- Los resultados se cargarán dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab de Marco Analítico Completo -->
+                <div class="tab-pane fade" id="comprehensive" role="tabpanel" aria-labelledby="comprehensive-tab">
+                    <div>
+                        <!-- Descripción del Marco Analítico -->
+                        <div class="card mb-4 border-primary">
+                            <div class="card-header bg-primary bg-opacity-10">
+                                <h5 class="mb-0 text-dark">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Marco Analítico para Outliers en Investigación en Salud
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="text-justify">
+                                    Este módulo implementa un marco analítico completo para la caracterización, agrupamiento y generación de hipótesis sobre outliers. 
+                                    El objetivo no es "probarlos", sino entenderlos, caracterizarlos y generar insights clínicos.
+                                </p>
+                                <div class="row mt-3">
+                                    <div class="col-md-4">
+                                        <div class="card border-info">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-chart-bar fa-2x text-info mb-2"></i>
+                                                <h6>Fase 1</h6>
+                                                <p class="small mb-0">Caracterización Univariada y Bivariada</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border-success">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-project-diagram fa-2x text-success mb-2"></i>
+                                                <h6>Fase 2</h6>
+                                                <p class="small mb-0">Análisis Multivariado y Clustering</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="card border-warning">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-check-circle fa-2x text-warning mb-2"></i>
+                                                <h6>Fase 3</h6>
+                                                <p class="small mb-0">Integración y Validación</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fase 1: Caracterización Univariada y Bivariada -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-info">
+                                <h5 class="mb-0 text-dark">
+                                    <i class="fas fa-chart-bar me-2"></i>
+                                    Fase 1: Caracterización Univariada y Bivariada
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="accordion" id="phase1Accordion">
+                                    <!-- Perfil Demográfico/Clínico -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#demographicProfile">
+                                                <i class="fas fa-user-md me-2"></i>
+                                                Perfil Demográfico/Clínico
+                                            </button>
+                                        </h2>
+                                        <div id="demographicProfile" class="accordion-collapse collapse show" data-bs-parent="#phase1Accordion">
+                                            <div class="accordion-body">
+                                                <p class="text-muted mb-3">
+                                                    Analiza la asociación entre la condición de outlier y variables categóricas o continuas demográficas/clínicas.
+                                                    <strong>Las variables numéricas se analizarán automáticamente. Selecciona las variables categóricas que deseas incluir.</strong>
+                                                </p>
+                                                
+                                                <!-- Selector de variables categóricas -->
+                                                <div class="mb-3" id="demographicCategoricalSelector" style="display: none;">
+                                                    <label class="form-label fw-bold">Selecciona Variables Categóricas a Analizar:</label>
+                                                    <div class="form-text mb-2">
+                                                        <small class="text-muted">
+                                                            <i class="fas fa-info-circle me-1"></i>
+                                                            Las variables numéricas se analizarán automáticamente. Puedes seleccionar múltiples variables categóricas.
+                                                        </small>
+                                                    </div>
+                                                    <div id="demographicCategoricalCheckboxes" class="border rounded p-3" style="max-height: 200px; overflow-y: auto;">
+                                                        <!-- Las opciones se cargarán dinámicamente -->
+                                                    </div>
+                                                </div>
+                                                
+                                                <button type="button" class="btn btn-info" id="runDemographicProfile">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Análisis de Perfil Demográfico/Clínico
+                                                </button>
+                                                <div id="demographicProfileResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Patrones de Co-Ocurrencia -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#cooccurrencePatterns">
+                                                <i class="fas fa-link me-2"></i>
+                                                Patrones de Co-Ocurrencia de Outliers
+                                            </button>
+                                        </h2>
+                                        <div id="cooccurrencePatterns" class="accordion-collapse collapse" data-bs-parent="#phase1Accordion">
+                                            <div class="accordion-body">
+                                                <p class="text-muted mb-3">
+                                                    Identifica si los outliers en diferentes variables tienden a co-ocurrir, sugiriendo vías biológicas interrumpidas.
+                                                </p>
+                                                <button type="button" class="btn btn-success" id="runCooccurrenceAnalysis">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Análisis de Co-Ocurrencia
+                                                </button>
+                                                <div id="cooccurrenceResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fase 2: Análisis Multivariado y Clustering -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-success">
+                                <h5 class="mb-0 text-dark">
+                                    <i class="fas fa-project-diagram me-2"></i>
+                                    Fase 2: Análisis Multivariado y Clustering
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="accordion" id="phase2Accordion">
+                                    <!-- PCA Supervisado -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#supervisedPCA">
+                                                <i class="fas fa-chart-area me-2"></i>
+                                                PCA Supervisado (Outliers vs Normales)
+                                            </button>
+                                        </h2>
+                                        <div id="supervisedPCA" class="accordion-collapse collapse show" data-bs-parent="#phase2Accordion">
+                                            <div class="accordion-body">
+                                                <p class="text-muted mb-3">
+                                                    Análisis de Componentes Principales comparando outliers vs datos normales para identificar patrones multivariados.
+                                                </p>
+                                                <button type="button" class="btn btn-success" id="runSupervisedPCA">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar PCA Supervisado
+                                                </button>
+                                                <div id="supervisedPCAResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Clustering de Outliers -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#outlierClustering">
+                                                <i class="fas fa-sitemap me-2"></i>
+                                                Clustering de Outliers (K-means y DBSCAN)
+                                            </button>
+                                        </h2>
+                                        <div id="outlierClustering" class="accordion-collapse collapse" data-bs-parent="#phase2Accordion">
+                                            <div class="accordion-body">
+                                                <p class="text-muted mb-3">
+                                                    Identifica subtipos dentro de los outliers mediante clustering. DBSCAN encuentra grupos densos sin especificar el número a priori.
+                                                </p>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Método de Clustering:</label>
+                                                    <select class="form-select" id="clusteringMethod">
+                                                        <option value="kmeans">K-means</option>
+                                                        <option value="dbscan">DBSCAN</option>
+                                                        <option value="both">Ambos</option>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="btn btn-success" id="runOutlierClustering">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Clustering de Outliers
+                                                </button>
+                                                <div id="outlierClusteringResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Análisis de Redes -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#networkAnalysis">
+                                                <i class="fas fa-network-wired me-2"></i>
+                                                Análisis de Redes de Co-expresión
+                                            </button>
+                                        </h2>
+                                        <div id="networkAnalysis" class="accordion-collapse collapse" data-bs-parent="#phase2Accordion">
+                                            <div class="accordion-body">
+                                                <p class="text-muted mb-3">
+                                                    Construye redes de co-expresión para outliers vs normales y compara centralidad de genes/variables.
+                                                </p>
+                                                <button type="button" class="btn btn-success" id="runNetworkAnalysis">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Análisis de Redes
+                                                </button>
+                                                <div id="networkAnalysisResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fase 3: Integración y Validación -->
+                        <div class="card mb-4">
+                            <div class="card-header bg-warning">
+                                <h5 class="mb-0 text-dark">
+                                    <i class="fas fa-check-circle me-2"></i>
+                                    Fase 3: Integración y Validación
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="accordion" id="phase3Accordion">
+                                    <!-- Análisis de Supervivencia -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#survivalAnalysis">
+                                                <i class="fas fa-heartbeat me-2"></i>
+                                                Análisis de Supervivencia (Kaplan-Meier y Cox)
+                                            </button>
+                                        </h2>
+                                        <div id="survivalAnalysis" class="accordion-collapse collapse show" data-bs-parent="#phase3Accordion">
+                                            <div class="accordion-body">
+                                                <p class="text-muted mb-3">
+                                                    Evalúa si los outliers tienen un riesgo significativamente diferente de desarrollar un evento (muerte, recurrencia, complicación).
+                                                </p>
+                                                <div class="alert alert-info">
+                                                    <i class="fas fa-info-circle me-2"></i>
+                                                    <strong>Estructura de Variables Requeridas:</strong>
+                                                    <div class="mt-2">
+                                                        <p><strong>Variable de Tiempo:</strong> Debe ser numérica y representar el tiempo hasta el evento o tiempo de seguimiento.</p>
+                                                        <ul>
+                                                            <li><strong>Para análisis tradicional:</strong> Tiempo desde inicio hasta evento (días, meses, años)</li>
+                                                            <li><strong>Para datos longitudinales con múltiples mediciones:</strong>
+                                                                <ul>
+                                                                    <li>Si tienes mediciones en diferentes tiempos (basal, medición 2, medición 3), necesitas crear una variable que indique el tiempo desde el inicio del estudio hasta cada medición</li>
+                                                                    <li><strong>Ejemplo:</strong> Si "Tiempo" tiene valores "BASAL", "MED2", "MED3", puedes crear una variable numérica:
+                                                                        <ul>
+                                                                            <li>BASAL = 0 (días/meses desde inicio)</li>
+                                                                            <li>MED2 = tiempo transcurrido hasta segunda medición (ej: 30 días)</li>
+                                                                            <li>MED3 = tiempo transcurrido hasta tercera medición (ej: 60 días)</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>O usa el tiempo de la última medición como tiempo de seguimiento</li>
+                                                                </ul>
+                                                            </li>
+                                                        </ul>
+                                                        <p class="mt-2"><strong>Variable de Evento:</strong> Debe ser binaria (0/1, False/True, o categórica con 2 valores)</p>
+                                                        <ul>
+                                                            <li><strong>0 o False</strong> = No ocurrió el evento (censurado)</li>
+                                                            <li><strong>1 o True</strong> = Ocurrió el evento</li>
+                                                            <li><strong>Ejemplo:</strong> Si el evento es "desarrollo de complicación", 1 = sí desarrolló, 0 = no desarrolló (o fue censurado antes de desarrollarlo)</li>
+                                                        </ul>
+                                                        <p class="mt-2 text-info"><strong>Nota:</strong> Si tu dataset tiene múltiples filas por paciente (una por cada tiempo de medición), necesitarás transformar los datos para tener una fila por paciente con el tiempo máximo de seguimiento y el estado del evento al final del seguimiento.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Variable de Tiempo:</label>
+                                                    <select class="form-select" id="survivalTimeVariable">
+                                                        <option value="">Seleccionar variable de tiempo...</option>
+                                                    </select>
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Variable de Estado del Evento:</label>
+                                                    <select class="form-select" id="survivalEventVariable">
+                                                        <option value="">Seleccionar variable de evento...</option>
+                                                    </select>
+                                                </div>
+                                                <button type="button" class="btn btn-warning" id="runSurvivalAnalysis">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Ejecutar Análisis de Supervivencia
+                                                </button>
+                                                <div id="survivalAnalysisResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Modelos Predictivos -->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#predictiveModels">
+                                                <i class="fas fa-brain me-2"></i>
+                                                Modelos Predictivos (Random Forest)
+                                            </button>
+                                        </h2>
+                                        <div id="predictiveModels" class="accordion-collapse collapse" data-bs-parent="#phase3Accordion">
+                                            <div class="accordion-body">
+                                                <div class="alert alert-info mb-3">
+                                                    <h6 class="alert-heading"><i class="fas fa-info-circle me-2"></i>Recomendaciones Estadísticas</h6>
+                                                    <p class="mb-2"><strong>¿Qué variables seleccionar?</strong></p>
+                                                    <ul class="mb-2">
+                                                        <li><strong>Recomendación Principal:</strong> Incluye <strong>todas las variables relevantes</strong> (bioquímicas y genes) en un solo modelo inicial.</li>
+                                                        <li><strong>Ventajas:</strong> Captura interacciones entre variables, mejor capacidad predictiva, identifica qué tipo de variable es más importante.</li>
+                                                        <li><strong>Estrategia Alternativa:</strong> Si el modelo combinado es difícil de interpretar, puedes crear modelos separados (solo bioquímicas vs solo genes) para comparar.</li>
+                                                        <li><strong>Variables Bioquímicas:</strong> ACIDOURICO, BUN, COLESTEROL, CREATININ, GLUCOS, HB1AC, TG, UREA</li>
+                                                        <li><strong>Genes de Expresión:</strong> IL17, RORGT, SOCS1, SOCS3, STAT3, STAT4, STAT5, STAT6, TBET, TGFB, TNFALFA</li>
+                                                    </ul>
+                                                    <p class="mb-0"><small><strong>Nota:</strong> El análisis de importancia de variables te mostrará cuáles son más relevantes para predecir outliers.</small></p>
+                                                </div>
+                                                <p class="text-muted mb-3">
+                                                    Entrena un modelo para predecir la condición de outlier usando variables clínicas/demográficas y analiza la importancia de variables.
+                                                </p>
+                                                <div class="mb-3">
+                                                    <label class="form-label">Variables Predictoras (selecciona múltiples):</label>
+                                                    <select class="form-select" id="predictorVariables" multiple size="5">
+                                                        <!-- Se llenará dinámicamente -->
+                                                    </select>
+                                                    <div class="form-text">
+                                                        <small class="text-muted">Mantén presionado Ctrl (Cmd en Mac) para seleccionar múltiples variables. Se recomienda incluir todas las variables relevantes inicialmente.</small>
+                                                    </div>
+                                                </div>
+                                                <button type="button" class="btn btn-warning" id="runPredictiveModel">
+                                                    <i class="fas fa-play me-2"></i>
+                                                    Entrenar Modelo Predictivo
+                                                </button>
+                                                <div id="predictiveModelResults" class="mt-4">
+                                                    <!-- Resultados se cargarán aquí -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 

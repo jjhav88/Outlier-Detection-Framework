@@ -1,0 +1,84 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">
+                        <i class="fas fa-upload me-2"></i>
+                        Cargar Datasets
+                    </h4>
+                    <p class="card-text">
+                        Sube archivos CSV o Excel para comenzar el análisis de outliers. El sistema identificará automáticamente los tipos de variables y te permitirá editarlos según tus necesidades.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Area -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-cloud-upload-alt me-2"></i>
+                        Subir Nuevo Dataset
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <i class="fas fa-file-upload fa-3x text-primary mb-3"></i>
+                            <h5>Arrastra y suelta archivos aquí</h5>
+                            <p class="text-muted">o haz clic para seleccionar archivos</p>
+                            <p class="small text-muted">Formatos soportados: CSV, Excel (.xlsx, .xls)</p>
+                            <input type="file" id="fileInput" accept=".csv,.xlsx,.xls" style="display: none;">
+                            <button class="btn btn-primary mt-2" onclick="document.getElementById('fileInput').click()">
+                                <i class="fas fa-folder-open me-2"></i>
+                                Seleccionar Archivo
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Upload Progress -->
+                    <div id="uploadProgress" class="mt-3" style="display: none;">
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                        </div>
+                        <small class="text-muted mt-1">Procesando archivo...</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Datasets List -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="fas fa-database me-2"></i>
+                        Datasets Cargados
+                    </h5>
+                    <div>
+                        <span class="badge bg-primary" id="datasetCount">0 datasets</span>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="datasetsContainer" class="row g-3">
+                        <!-- Datasets will be loaded here as cards in a 3-column grid -->
+                    </div>
+                    
+                    <!-- Empty State -->
+                    <div id="emptyState" class="text-center py-5" style="display: none;">
+                        <i class="fas fa-database fa-3x text-muted mb-3"></i>
+                        <h5 class="text-muted">No hay datasets cargados</h5>
+                        <p class="text-muted">Sube tu primer archivo para comenzar el análisis</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
